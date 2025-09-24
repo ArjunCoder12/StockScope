@@ -69,14 +69,14 @@ src/
 - Add subtle shadows and borders to make components stand out
 - Choose colors that convey trust and professionalism
 - Make sure text is readable and not too small
-
+##
 By the end of Week 1, you should have:
 - A React application that runs smoothly
 - A dashboard layout with placeholder components
 - Professional-looking styling
 - All components properly connected
 - A foundation ready for real data integration
-
+##
 - Don't worry about real data yet - focus on the structure and design
 - Use placeholder data to make your components look realistic
 - Think about how users will interact with your dashboard
