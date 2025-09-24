@@ -72,25 +72,25 @@ GET /api/v1/hello
 - Register blueprints for different route groups
 - Enable CORS for frontend communication
 - Set up proper error handling
-
+##
 - Use tools like Postman or curl to test endpoints
 - Check that JSON responses are properly formatted
 - Verify CORS headers are present
 - Test error handling with invalid requests
-
+##
 By the end of Week 1, you should have:
 - A Flask server that runs on `localhost:5000`
 - Working API endpoints that return JSON
 - Proper CORS configuration
 - Clean, organized code structure
 - A foundation ready for real data integration
-
+##
 - Start simple and build up complexity
 - Test your endpoints as you create them
 - Think about how the frontend will consume your API
 - Plan for future endpoints (you'll add many more!)
 - Keep your code organized - you'll be adding lots of features
-
+##
 - **CORS Issues**: Make sure to enable CORS for frontend communication
 - **Port Conflicts**: Ensure your Flask app runs on port 5000
 - **JSON Responses**: Always return proper JSON, not plain text
