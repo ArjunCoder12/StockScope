@@ -2,7 +2,7 @@
 
 A comprehensive stock analysis platform that combines real-time market data, technical indicators, sentiment analysis, and AI-generated investment summaries.
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 StockScope_Skel/
@@ -12,7 +12,7 @@ StockScope_Skel/
 └── docs/            # Documentation
 ```
 
-## 👥 Team Assignments
+## Team Assignments
 
 ### Frontend Team (React.js)
 - **Primary Files**: `frontend/src/`
@@ -31,7 +31,7 @@ StockScope_Skel/
 
 ---
 
-## 📅 10-Week Development Timeline
+## 10-Week Development Timeline
 
 ### **Week 1 – Repo Setup & Project Skeletons**
 **Goal:** Everyone can run frontend, backend, and NLP skeleton locally.
@@ -57,7 +57,7 @@ StockScope_Skel/
   - Function returns `{positive:0.33, neutral:0.33, negative:0.33}`
 - **Deliverable**: Callable mock NLP function
 
-#### Documentation Team
+#### Documentation
 - **Files**: `docs/architecture.md`, `docs/api_contract.md`
 - **Tasks**: 
   - Finalize system architecture
@@ -281,7 +281,7 @@ StockScope_Skel/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v16+)
@@ -309,15 +309,15 @@ cd ../nlp
 pip install -r requirements.txt
 ```
 
-## 📋 Development Guidelines
+## Development Guidelines
 
-1. **Code Reviews**: All PRs require at least one team member review
+1. **Code Reviews**: All PRs require at least one team member review -> PM review.
 2. **Testing**: Write tests for new features
-3. **Documentation**: Update docs when adding new features
-4. **API Keys**: Never commit API keys to repository
-5. **Branching**: Use feature branches, merge to main
+3. **Documentation**: Update docs when adding new features - notify PM via Slack or Meeting for official documentation changes.
+4. **API Keys**: Never commit API keys to repository.
+5. **Branching**: Use feature branches for each new feature developed, "nlp-demofeature", assign team member pull review to merge to team branch "nlp", PM review to merge to main.
 
-## 🎯 Success Metrics
+## Success Metrics
 
 - **Week 1-2**: All services run locally
 - **Week 3-4**: Real data integration working
@@ -325,7 +325,7 @@ pip install -r requirements.txt
 - **Week 7-8**: Full integration complete
 - **Week 9-10**: Production-ready deployment
 
-## 📞 Team Communication
+## Team Communication
 
 - **Halfpoint Standups**: Wednesdays ~ PM EST
 - **Weekly Reviews**: Saturdays ~ PM EST
