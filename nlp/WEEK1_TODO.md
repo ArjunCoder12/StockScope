@@ -73,20 +73,20 @@ def get_sentiment_summary(ticker):
 - Generate believable financial news headlines
 - Add confidence scores to make it feel authentic
 - Plan for how real ML models will replace this mock data
-
+##
 - Test with different ticker symbols
 - Verify JSON output format
 - Check that sentiment scores add up to 1.0
 - Ensure functions handle edge cases gracefully
 
-
+##
 By the end of Week 1, you should have:
 - A working sentiment analysis module
 - Functions that return realistic mock data
 - Clean, organized code structure
 - A foundation ready for real ML model integration
 - Proper documentation and testing setup
-
+##
 
 - **Data Format**: Ensure your functions return data in the format the backend expects
 - **Realistic Mock Data**: Make your mock data believable and professional
