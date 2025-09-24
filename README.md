@@ -327,12 +327,12 @@ pip install -r requirements.txt
 
 ## 📞 Team Communication
 
-- **Daily Standups**: 9 AM EST
-- **Weekly Reviews**: Fridays 5 PM EST
-- **Slack Channel**: #stockscope-dev
-- **Project Board**: GitHub Projects
+- **Halfpoint Standups**: Wednesdays ~ PM EST
+- **Weekly Reviews**: Saturdays ~ PM EST
+- **Slack Channel**: #sof-stockscope-project
+- **Project Details**: Refer to Google Drive
 
 ---
 
-*Last Updated: [Current Date]*
-*Project Manager: [Your Name]*
+*Last Updated: 9/24/25*
+*Project Manager: Shruthi Arunkumar*
