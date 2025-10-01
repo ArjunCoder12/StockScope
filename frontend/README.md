@@ -59,11 +59,43 @@
    - The app will automatically reload when you make changes
 
 7. **Pushing code**
+
    - After committing the code you can push it with:
+
    ```bash
    git push -u origin <branch-name>
    ```
+
    - -u links the local branch to the remote branch, allowing for just `git push` in the future
+
+8. **Managing Version Control**
+
+- if you have local changes not yet pushed to the remote, and frontend was updated:
+
+```bash
+
+# fetch updates from remote
+git fetch --all
+# update local branch with changes from frontend (only neccessary if frontend got updated)
+git checkout <your-current-branch>
+git merge origin/frontend
+# you can now safely push your local commits to the remote branch
+git push -u origin <your-current-branch>
+```
+
+-- if no frontend changes occured
+
+```bash
+git push -u origin <your-current-branch>
+```
+
+-- after using -u on a push for a branch, you can simply to do
+
+```bash
+git push
+```
+
+in the future
 
 ## Available Scripts
 
@@ -89,9 +121,15 @@
 ## 📁 Project Structure
 
 ```
+
 frontend/
-├── public/               # Static assets
-├── src/                  # React infrastructure
-│   ├── components/       # React Components
-│   ├── styles/           # CSS files (organized by component)
+├── public/ # Static assets
+├── src/ # React infrastructure
+│ ├── components/ # React Components
+│ ├── styles/ # CSS files (organized by component)
+
+```
+
+```
+
 ```
