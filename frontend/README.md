@@ -76,6 +76,8 @@
 
 # fetch updates from remote
 git fetch --all
+#To pull these updates into your local repo
+git pull origin/frontend
 # update local branch with changes from frontend (only neccessary if frontend got updated)
 git checkout <your-current-branch>
 git merge origin/frontend
