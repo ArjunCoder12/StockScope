@@ -1,0 +1,12 @@
+.responsive-container {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.responsive-container__content {
+    width: 100%;
+    max-width: 2400px;
+    margin: auto;
+}
