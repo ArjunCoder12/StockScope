@@ -1,0 +1,147 @@
+.sentiment-card {
+  padding: 20px;
+  border-radius: 20px;
+  /* have to play with margin once all elements in place */
+  width: 30%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.sentiment-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.last-updated {
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.sentiment-card.bullish {
+  background: linear-gradient(95deg, #10b981 0%, #22644f 100%);
+  color: white;
+}
+
+.sentiment-card.bearish {
+  background: linear-gradient(135deg, #ef4444 0%, #751e1e 100%);
+  color: white;
+}
+
+.sentiment-card.neutral {
+  background: linear-gradient(135deg, #a78b5b 0%, #62371c 100%);
+  color: white;
+}
+
+.sentiment-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sentiment-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ticker-symbol {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.sentiment-body {
+  margin-bottom: 16px;
+}
+
+.sentiment-description {
+    
+    margin: 0;
+    font-size: 15px;                  
+    font-weight: 500;                  
+    line-height: 1.6;                   
+    color: rgba(255, 255, 255, 0.95);  
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2); 
+    letter-spacing: 0.3px;      
+    overflow-wrap: break-word;        
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; /* System fonts for crispness */
+  }
+
+  .sentiment-confidence {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+  }
+
+  .confidence-value {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  // Have to play with spacing once all elements are in place
+  @media (max-width: 768px) {
+    .sentiment-card {
+        width: 50%;
+      padding: 16px;
+    }
+    
+    .sentiment-title {
+      font-size: 16px;
+    }
+    
+    .sentiment-description {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    
+    .sentiment-confidence {
+      font-size: 16px;
+    }
+    
+    .ticker-symbol {
+      font-size: 12px;
+      padding: 3px 6px;
+    }
+    
+    .last-updated {
+      font-size: 11px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sentiment-card {
+        width: 90%;
+      padding: 12px;
+    }
+    
+    .sentiment-title {
+      font-size: 14px;
+    }
+    
+    .sentiment-description {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    
+    .sentiment-confidence {
+      font-size: 14px;
+    }
+    
+    .ticker-symbol {
+      font-size: 11px;
+      padding: 2px 5px;
+    }
+    
+    .last-updated {
+      font-size: 10px;
+    }
+  }
