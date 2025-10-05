@@ -7,6 +7,7 @@ interface SentimentCardProps {
   description: string;
   ticker: string;
   lastUpdated: string;
+  containerProps?: React.CSSProperties;
 }
 
 export default function SentimentCard({
@@ -15,11 +16,16 @@ export default function SentimentCard({
   description,
   ticker,
   lastUpdated,
+  containerProps,
 }: SentimentCardProps) {
   const sentimentClass = getSentimentColor(sentiment);
 
   return (
-    <ResponsiveContainer>
+    <ResponsiveContainer
+      style={{
+        ...containerProps,
+      }}
+    >
       <div className={`sentiment-card ${sentimentClass}`}>
         <SentimentHeader ticker={ticker} lastUpdated={lastUpdated} />
         <SentimentBody description={description} />
