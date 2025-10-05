@@ -1,10 +1,9 @@
 import ChartPanel from "./ChartPanel";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 import "../styles/Dashboard.css";
 import { ArrowTrendingDownIcon } from "@heroicons/react/24/solid";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
+import SentimentCard from "./SentimentCard";
 
 //yahoo finance and vantage api keys
 export default function Dashboard() {
@@ -53,9 +52,17 @@ CSS classes:
 */
 function StockChartPanel() {
   return (
-    <div className="dashboard-panel">
+    <div
+      className="dashboard-panel"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
       <h3>Chart</h3>
-      {/* <ChartPanel title="Example" apiURL="" dataKey="" /> */}
+      <ChartPanel title="Example" apiURL="" dataKey="" />
+
       {/* needs data to work properly */}
     </div>
   );
@@ -91,6 +98,17 @@ function StockNewsPanel() {
             </h5>
           </div>
         </div>
+        <SentimentCard
+          sentiment="positive"
+          confidence="90%"
+          description="This is a positive sentiment"
+          ticker="AAPL"
+          lastUpdated="2021-01-01"
+          containerProps={{
+            justifyContent: "center",
+            display: "flex",
+          }}
+        />
       </div>
     </div>
   );
