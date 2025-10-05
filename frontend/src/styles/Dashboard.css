@@ -1,0 +1,105 @@
+
+
+.dashboard-panel {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+}
+
+.dashboard-panel:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.dashboard-panel h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 8px;
+}
+
+.dashboard-grid {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    
+}
+
+.dashboard-stock-info-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 14px;
+    color: #6b7280;
+    padding: 16px 0 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 8px;
+}
+
+.dashboard-stock-info-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 8px 0;
+}
+
+.dashboard-stock-info-data > div {
+    padding: 8px 0;
+    font-size: 15px;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.dashboard-news-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dashboard-news-details { /* contains both the image and the text divs */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 12px;
+}
+
+.dashboard-news-details-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.dashboard-alerts {
+    margin-top: 0.75rem;   
+    display: flex;          
+    align-items: center;  
+    justify-content: center;  
+    gap: 2 rem;          
+    color: #dc2626;     
+}
+
+.dashboard-alerts-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
