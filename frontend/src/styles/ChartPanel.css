@@ -1,0 +1,19 @@
+.chart-container {
+    width: 100%;
+    height: 200%;
+  }
+
+/* Tablet and smaller screens */
+@media (max-width: 768px) {
+    .chart-container {
+      height: 250px;
+      margin: 0 -10px; /* Slight negative margin for better fit */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chart-container {
+      height: 200px;
+      margin: 0 -10px; /* Slight negative margin for better fit */
+    }
+  }
