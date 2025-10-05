@@ -11,6 +11,9 @@ ul {
 
 
 .nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: linear-gradient(90deg, 
     #000000 0%, 
     #2A2A2A 20%, 
