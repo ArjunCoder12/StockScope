@@ -1,147 +1,147 @@
 .sentiment-card {
-  padding: 20px;
-  border-radius: 20px;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
   /* have to play with margin once all elements in place */
   width: 50%;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-xl);
+  transition: var(--transition-normal);
 }
 
 .sentiment-card:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
 }
 
 .last-updated {
-  font-size: 12px;
+  font-size: var(--font-size-base);
   font-style: italic;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-white-muted);
   text-align: center;
 }
 
 .sentiment-card.bullish {
-  background: linear-gradient(95deg, #10b981 0%, #22644f 100%);
-  color: white;
+  background: var(--gradient-bullish);
+  color: var(--color-text-white);
 }
 
 .sentiment-card.bearish {
-  background: linear-gradient(135deg, #ef4444 0%, #751e1e 100%);
-  color: white;
+  background: var(--gradient-bearish);
+  color: var(--color-text-white);
 }
 
 .sentiment-card.neutral {
-  background: linear-gradient(135deg, #a78b5b 0%, #62371c 100%);
-  color: white;
+  background: var(--gradient-neutral);
+  color: var(--color-text-white);
 }
 
 .sentiment-header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-bg-overlay-light);
 }
 
 .sentiment-title {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 .ticker-symbol {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-left: 8px;
+  background: var(--color-bg-overlay);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  margin-left: var(--spacing-sm);
 }
 
 .sentiment-body {
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .sentiment-description {
     
     margin: 0;
-    font-size: 15px;                  
-    font-weight: 500;                  
+    font-size: var(--font-size-xl);                  
+    font-weight: var(--font-weight-medium);                  
     line-height: 1.6;                   
-    color: rgba(255, 255, 255, 0.95);  
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2); 
+    color: var(--color-text-white-strong);  
+    text-shadow: 0 2px 4px var(--shadow-strong), 0 1px 2px var(--shadow-medium); 
     letter-spacing: 0.3px;      
     overflow-wrap: break-word;        
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; /* System fonts for crispness */
   }
 
   .sentiment-confidence {
-    font-size: 18px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-white-strong);
     text-align: center;
   }
 
   .confidence-value {
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-underline-offset: var(--spacing-xs);
   }
 
   // Have to play with spacing once all elements are in place
   @media (max-width: 768px) {
     .sentiment-card {
         width: 50%;
-      padding: 16px;
+      padding: var(--spacing-lg);
     }
     
     .sentiment-title {
-      font-size: 16px;
+      font-size: var(--font-size-2xl);
     }
     
     .sentiment-description {
-      font-size: 13px;
+      font-size: var(--font-size-md);
       line-height: 1.5;
     }
     
     .sentiment-confidence {
-      font-size: 16px;
+      font-size: var(--font-size-2xl);
     }
     
     .ticker-symbol {
-      font-size: 12px;
+      font-size: var(--font-size-base);
       padding: 3px 6px;
     }
     
     .last-updated {
-      font-size: 11px;
+      font-size: var(--font-size-sm);
     }
   }
   
   @media (max-width: 480px) {
     .sentiment-card {
         width: 90%;
-      padding: 12px;
+      padding: var(--spacing-md);
     }
     
     .sentiment-title {
-      font-size: 14px;
+      font-size: var(--font-size-lg);
     }
     
     .sentiment-description {
-      font-size: 12px;
+      font-size: var(--font-size-base);
       line-height: 1.4;
     }
     
     .sentiment-confidence {
-      font-size: 14px;
+      font-size: var(--font-size-lg);
     }
     
     .ticker-symbol {
-      font-size: 11px;
+      font-size: var(--font-size-sm);
       padding: 2px 5px;
     }
     
     .last-updated {
-      font-size: 10px;
+      font-size: var(--font-size-xs);
     }
   }
