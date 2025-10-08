@@ -4,8 +4,6 @@ import "../styles/Dashboard.css";
 import { ArrowTrendingDownIcon } from "@heroicons/react/24/solid";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
 import SentimentCard from "./SentimentCard";
-
-//yahoo finance and vantage api keys
 export default function Dashboard() {
   //Formatting date for stock info section
   const date = new Date();
