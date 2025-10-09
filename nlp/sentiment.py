@@ -7,6 +7,12 @@ class SentimentAnalyzer:
         Currently returns equal distribution for positive, neutral, and negative.
 
         """
+
+        #validate the ticker if not uppercase
+        if not ticker.isalpha():
+            raise ValueError("Invalid ticker symbol")
+
+
         return {
             "positive": 0.33,
             "neutral": 0.33,
