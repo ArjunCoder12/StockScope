@@ -29,16 +29,23 @@ class SentimentAnalyzer:
             f"Investors react negatively to {ticker.upper()} news",
         ]
 
+        #fake confidence check, how sure we are about the sentiment 
+        confidence = round(max(weights.values()) + random.uniform(0.0, 0.1), 2)
 
 
+
+        #json like output
         return {
-            "positive": 0.33,
-            "neutral": 0.33,
-            "negative": 0.33
+            "ticker": ticker.upper(),
+            "aggregate": weights,
+            "headlines": headlines,
+            "confidence": confidence
         }
 
 
-    if __name__ == "__main__":
-        ticker = "AAPL"
-        result = analyze_sentiment(ticker)
-        print(f"Sentiment for {ticker}: {result}")
+if __name__ == "__main__":
+    print(SentimentAnalyzer.analyze_sentiment("AAPL"))
+
+"""
+Example of the output: 
+{'ticker': 'AAPL', 'aggregate': {'positive': 0.3, 'neutral': 0.5, 'negative': 0.2}, 'headlines': ['AAPL shares rise amid market optimism', 'Analysts comment on AAPL performance', 'Investors react negatively to AAPL news'], 'confidence': 0.58}"""
