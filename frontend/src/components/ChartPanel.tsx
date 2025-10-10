@@ -14,6 +14,7 @@ import {
 } from "recharts";
 
 import "../styles/ChartPanel.css";
+import { useChartingData } from "../api/hooks/dashboardHooks";
 
 //Defining props for ChartPanel component
 interface ChartPanelProps {
@@ -71,12 +72,10 @@ export default function ChartPanel({
   apiURL,
   dataKey,
 }: ChartPanelProps) {
-  const [data, setData] = useState([]);
-
-  //Fetching data from API
-  // useEffect(() => {
-  //   axios.get(apiURL).then((response) => setData(response.data)); //import yahoo finance api data
-  // }, [apiURL]);
+  //React query to get data once available
+  // const { data, isLoading, error } = useChartingData(title);
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>

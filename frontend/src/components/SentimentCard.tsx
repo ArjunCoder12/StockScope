@@ -1,5 +1,6 @@
 import "../styles/SentimentCard.css";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
+import { useSentimentData } from "../api/hooks/dashboardHooks";
 
 interface SentimentCardProps {
   sentiment: string;
@@ -20,6 +21,10 @@ export default function SentimentCard({
 }: SentimentCardProps) {
   const sentimentClass = getSentimentColor(sentiment);
 
+  //How we would use the react query
+  // const { data, isLoading, error } = useSentimentData(ticker);
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
   return (
     <ResponsiveContainer
       style={{
