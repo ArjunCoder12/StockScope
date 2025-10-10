@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios"; //API calls to get chart data
+// import React, { useEffect, useState } from "react";
+// import axios from "axios"; //API calls to get chart data
 import {
-  LineChart,
-  Line,
+  // LineChart,
+  // Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 import "../styles/ChartPanel.css";
-import { useChartingData } from "../api/hooks/dashboardHooks";
+// import { useChartingData } from "../api/hooks/generalHooks";
 
 //Defining props for ChartPanel component
 interface ChartPanelProps {

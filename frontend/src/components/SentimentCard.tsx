@@ -1,6 +1,5 @@
 import "../styles/SentimentCard.css";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
-import { useSentimentData } from "../api/hooks/dashboardHooks";
 
 interface SentimentCardProps {
   sentiment: string;
