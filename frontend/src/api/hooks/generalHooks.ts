@@ -4,9 +4,12 @@ import {
   STOCK_LIST_KEY,
   CHARTING_DATA_KEY,
   SENTIMENT_DATA_KEY,
+  NEWS_DATA_KEY,
+  ALL_NEWS_DATA_KEY,
 } from "../constants";
 import { getCharting } from "../routing/chartingRoute";
 import { getSentiment } from "../routing/sentimentRoute";
+import { getAllNews, getNews } from "../routing/newsRoute";
 
 /**
  * Get the stock list
@@ -42,6 +45,22 @@ export const useSentimentData = (ticker: string) => {
   return useQuery({
     queryKey: [SENTIMENT_DATA_KEY],
     queryFn: () => getSentiment(ticker),
+    staleTime: 2000, //20 seconds
+  });
+};
+
+export const useNewsData = (ticker: string) => {
+  return useQuery({
+    queryKey: [NEWS_DATA_KEY],
+    queryFn: () => getNews(ticker),
+    staleTime: 2000, //20 seconds
+  });
+};
+
+export const useAllNewsData = () => {
+  return useQuery({
+    queryKey: [ALL_NEWS_DATA_KEY],
+    queryFn: () => getAllNews(),
     staleTime: 2000, //20 seconds
   });
 };
