@@ -9,8 +9,11 @@ mock_fundamentals = {
 @fundamentals_bp.route('/fundamentals/<ticker>', methods=['GET'])
 def get_fundamentals(ticker):
     ticker = ticker.upper()
-    if (ticker in mock_fundamentals):
+    if len(ticker) < 1 or len(ticker) > 5:
+        return jsonify({"status": "error", "message": f"Ticker must be 1–5 characters long."}), 400
+    elif not ticker.isalpha():
+        return jsonify({"status": "error", "message": f"Ticker must contain letters only."}), 400
+    elif (ticker in mock_fundamentals):
         return jsonify({"status": "success", "data": mock_fundamentals[ticker]}), 200
     else:
         return jsonify({"status": "error", "message": f"No data for ticker {ticker}"}), 404
-    

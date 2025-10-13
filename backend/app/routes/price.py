@@ -11,7 +11,11 @@ mock_prices = {
 @price_bp.route("/price/<ticker>", methods = ["GET"])
 def get_price(ticker):
     ticker = ticker.upper()
-    if ticker in mock_prices:
+    if len(ticker) < 1 or len(ticker) > 5:
+        return jsonify({"status": "error", "message": f"Ticker must be 1–5 characters long."}), 400
+    elif not ticker.isalpha():
+        return jsonify({"status": "error", "message": f"Ticker must contain letters only."}), 400
+    elif (ticker in mock_prices):
         return jsonify({"status": "success", "data": mock_prices[ticker]}), 200
     else:
-        return jsonify({"status": "error", "message": f"No data for ticker {mock_prices[ticker]}"}), 404
+        return jsonify({"status": "error", "message": f"No data for ticker {ticker}"}), 404
