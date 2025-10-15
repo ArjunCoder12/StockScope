@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from app.fetchers import get_price_data
 
 price_bp = Blueprint("price", __name__)
 
@@ -10,6 +11,7 @@ mock_prices = {
 
 @price_bp.route("/price/<ticker>", methods = ["GET"])
 def get_price(ticker):
+    data = get_price_data(ticker, "daily")
     ticker = ticker.upper()
     if len(ticker) < 1 or len(ticker) > 5:
         return jsonify({"status": "error", "message": f"Ticker must be 1–5 characters long."}), 400
@@ -19,3 +21,5 @@ def get_price(ticker):
         return jsonify({"status": "success", "data": mock_prices[ticker]}), 200
     else:
         return jsonify({"status": "error", "message": f"No data for ticker {ticker}"}), 404
+    return jsonify(data)
+    
