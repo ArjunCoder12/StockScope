@@ -20,3 +20,14 @@ export interface SentimentType {
   ticker: string;
   lastUpdated: string;
 }
+
+export interface NewsType {
+  ticker: string;
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  sentiment: string;
+  confidence: number;
+  lastUpdated: string;
+}
