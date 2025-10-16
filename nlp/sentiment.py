@@ -1,6 +1,7 @@
 # nlp/sentiment.py
 
 import random
+import json
 
 class SentimentAnalyzer:
     def analyze_sentiment(ticker: str) -> dict:
@@ -44,8 +45,11 @@ class SentimentAnalyzer:
 
 
 if __name__ == "__main__":
-    print(SentimentAnalyzer.analyze_sentiment("AAPL"))
+    ticker = "AAPL"
+    result = SentimentAnalyzer.analyze_sentiment(ticker)
 
-"""
-Example of the output: 
-{'ticker': 'AAPL', 'aggregate': {'positive': 0.3, 'neutral': 0.5, 'negative': 0.2}, 'headlines': ['AAPL shares rise amid market optimism', 'Analysts comment on AAPL performance', 'Investors react negatively to AAPL news'], 'confidence': 0.58}"""
+    # Save result to JSON file
+    with open(f"{ticker}_sentiment.json", "w") as f:
+        json.dump(result, f, indent=4)
+
+    print(f"Sentiment analysis saved to {ticker}_sentiment.json")
