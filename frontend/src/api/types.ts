@@ -8,9 +8,21 @@ export interface StockListType {
   status: string;
 }
 
+// Individual price point data
+export interface PricePoint {
+  date: string; // e.g., "Oct 1" or "2024-10-01" or timestamp
+  price: number; // Stock price
+  volume?: number; // Trading volume (optional)
+  open?: number; // Opening price (optional)
+  high?: number; // High price (optional)
+  low?: number; // Low price (optional)
+  close?: number; // Closing price (optional)
+}
+
 export interface ChartingType {
-  data: any; //have to change this once we start getting better understanding of data from backend
+  data: PricePoint[]; // Array of price points
   status: string;
+  ticker?: string; // Which stock this data is for
 }
 
 export interface SentimentType {
@@ -27,7 +39,5 @@ export interface NewsType {
   description: string;
   url: string;
   image: string;
-  sentiment: string;
-  confidence: number;
   lastUpdated: string;
 }
