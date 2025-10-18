@@ -3,6 +3,9 @@ from werkzeug.exceptions import BadRequest, NotFound, InternalServerError
 from flask_cors import CORS
 from .routes.price import price_bp
 from .routes.fundamentals import fundamentals_bp
+from .routes.stocks import stock_list_bp
+from .routes.chart import chart_bp
+
 def create_app():
     app = Flask(__name__)
     CORS(app)
@@ -10,6 +13,9 @@ def create_app():
     app.register_blueprint(hello_bp, url_prefix = '/api/v1')
     app.register_blueprint(price_bp, url_prefix = '/api/v1')
     app.register_blueprint(fundamentals_bp, url_prefix = '/api/v1')
+    app.register_blueprint(stock_list_bp, url_prefix = '/api/v1')
+    app.register_blueprint(chart_bp, url_prefix = '/api/v1')
+
     @app.errorhandler(BadRequest)
     def handle_400(e):
         return jsonify({

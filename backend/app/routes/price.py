@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
-from app.fetchers import get_price_data
-
+from ..fetchers import get_price_data
+#.. goes one level up from the current routes/
+#app.fetchers is the absolute import, and there's no app/ above routes/ in the pack
 
 price_bp = Blueprint("price", __name__)
 

@@ -7,7 +7,7 @@ ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 
 BASE_URL = "https://www.alphavantage.co/query"
 
-def get_price_data(ticker, timeframe = "daily"):
+def get_price_data(ticker, timeframe = "daily", interval = "5min"):
     function_map = {
         "daily": "TIME_SERIES_DAILY",
         "weekly": "TIME_SERIES_WEEKLY",
