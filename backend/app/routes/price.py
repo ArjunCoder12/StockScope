@@ -18,13 +18,36 @@ def get_price(ticker):
     elif not ticker.isalpha():
         return jsonify({"status": "error", "message": f"Ticker must contain letters only."}), 400
     try:
-        data = get_price_data(ticker, "daily") or mock_prices.get(ticker)
+        data = get_price_data(ticker, "daily")
         if not data:
+            data = mock_prices.get(ticker)
+            if data:
+                return jsonify({
+                    "status": "sucess",
+                    "data": data
+                    }), 200
             return jsonify({
                     "status": "error",
                     "message": f"No data found for {ticker}"
                 }), 404
-        return jsonify(data)
+        latest_date = sorted(data.keys(), reverse=True)[0]
+        latest_info = data[latest_date]
+        formatted = {
+            "ticker": ticker.upper(),
+            "date": latest_date,
+            "price": {
+                "open": float(latest_info["1. open"]),
+                "high": float(latest_info["2. high"]),
+                "low": float(latest_info["3. low"]),
+                "close": float(latest_info["4. close"]),
+                "volume": int(latest_info["5. volume"])
+            },
+            "timeframe": "daily"
+        }
+        return jsonify({
+            "status": "sucess",
+            "data": formatted
+            }), 200
     except ValueError as ve:
         return jsonify({"error": str(ve)}), 400
     except Exception as e:
