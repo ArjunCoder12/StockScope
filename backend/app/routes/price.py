@@ -20,12 +20,6 @@ def get_price(ticker):
     try:
         data = get_price_data(ticker, "daily")
         if not data:
-            data = mock_prices.get(ticker)
-            if data:
-                return jsonify({
-                    "status": "sucess",
-                    "data": data
-                    }), 200
             return jsonify({
                     "status": "error",
                     "message": f"No data found for {ticker}"
@@ -45,7 +39,7 @@ def get_price(ticker):
             "timeframe": "daily"
         }
         return jsonify({
-            "status": "sucess",
+            "status": "success",
             "data": formatted
             }), 200
     except ValueError as ve:
