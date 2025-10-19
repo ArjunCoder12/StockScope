@@ -6,6 +6,7 @@ from .routes.fundamentals import fundamentals_bp
 from .routes.stocks import stock_list_bp
 from .routes.chart import chart_bp
 from .routes.sentiment import sentiment_bp
+from .routes.watchlist import watchlist_bp
 
 def create_app():
     app = Flask(__name__)
@@ -17,6 +18,7 @@ def create_app():
     app.register_blueprint(stock_list_bp, url_prefix = '/api/v1')
     app.register_blueprint(chart_bp, url_prefix = '/api/v1')
     app.register_blueprint(sentiment_bp, url_prefix = '/api/v1')
+    app.register_blueprint(watchlist_bp, url_prefix = '/api/v1')
 
     @app.errorhandler(BadRequest)
     def handle_400(e):

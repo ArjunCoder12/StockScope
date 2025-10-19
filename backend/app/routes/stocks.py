@@ -1,38 +1,60 @@
-from flask import Blueprint, jsonify
-from app.fetchers import get_price_data
+import time
+from flask import Blueprint, jsonify, request
+from .watchlist import load_watchlist
+from ..fetchers import get_price_data
+
+# Stock list with pricing: loads persisted watchlist and enriches
+# with latest price and daily change. Supports q/limit filters.
 
 stock_list_bp = Blueprint("stocks", __name__)
 
-watchlist = [
-    {"ticker": "AAPL", "name": "Apple Inc."},
-    {"ticker": "TSLA", "name": "Tesla Inc."},
-]
-
-@stock_list_bp.route("/stocks", methods = ["GET"])
+@stock_list_bp.route("/stock-list", methods = ["GET"])
 def get_stock_list():
+    
     try:
-        stock_data = []
-        for stock in watchlist:
-            data = get_price_data(stock["ticker"], "daily")
+        q = (request.args.get("q") or "").strip().lower()
+        limit = int(request.args.get("limit", 25))
+        limit = max(1, min(limit, 100))
 
+        items = load_watchlist()
+        if q:
+            items = [s for s in items if q in s["ticker"].lower() or q in s["name"].lower()]
+
+        out = []
+        for stock in items:
+            data = _get_prices_cached(stock["ticker"]) or {}
             if not data:
                 continue
-
-            dates = list(data.keys())
-            latest_date, prev_date = dates[0], dates[1]
-            latest_close = float(data[latest_date]["4. close"])
-            prev_close = float(data[prev_date]["4. close"])
-            change = round(latest_close - prev_close, 2)
-
-            stock_data.append({
+            dates = sorted(data.keys(), reverse=True)
+            if len(dates) < 2:
+                continue
+            latest, prev = dates[0], dates[1]
+            latest_close = float(data[latest]["4. close"])
+            prev_close = float(data[prev]["4. close"])   
+            out.append({
                 "ticker": stock["ticker"],
                 "name": stock["name"],
                 "price": round(latest_close, 2),
-                "change": change,
-                "status": "active"
+                "change": round(latest_close - prev_close, 2),
+                "status": "active",
             })
+            if len(out) >= limit:
+                break
 
-        return jsonify({"status": "success", "data":stock_data}), 200
-    
+        return jsonify({"status": "success", "data": out}), 200
     except Exception as e:
-        return jsonify({"status": "error", "data": [], "message": str(e)}), 500
+        return jsonify({"status": "error", "message": str(e), "data": []}), 500
+
+
+_CACHE = {}
+_CACHE_TTL = 120  
+
+
+def _get_prices_cached(ticker):
+    now = time.time()
+    entry = _CACHE.get(ticker)
+    if entry and (now - entry["ts"]) < _CACHE_TTL:
+        return entry["data"]
+    data = get_price_data(ticker, "daily")
+    _CACHE[ticker] = {"ts": now, "data": data}
+    return data
