@@ -4,8 +4,7 @@ import ResponsiveContainer from "../structures/ResponsiveContainer";
 import AlertsPanel from "../components/AlertsPanel";
 import StockStatusPanel from "../components/StockStatusPanel";
 import SectorTrends from "../components/SectorTrendsPanel";
-import QuickFactPanel from "../components/QuickFactPanel";
-
+import QuickFactsPanel from "../components/QuickFactPanel";
 
 export default function Dashboard() {
   //Formatting date for stock info section
@@ -24,7 +23,7 @@ export default function Dashboard() {
         backgroundColor: "rgba(28, 32, 29, 0.44)",
       }}
     >
-      <h2>Dashboard</h2>
+      <h2 style={{color: "white"}}>Dashboard</h2>
 
       <div className="dashboard-grid">
         <div className="dashboard-panel" style={{ gridArea: "stockstatus" }}>
@@ -36,7 +35,10 @@ export default function Dashboard() {
         </div>
 
         <div className="dashboard-panel" style={{ gridArea: "quickfacts" }}>
-          <QuickFactPanel title="Market Cap" value="$2.3T"/>
+          <QuickFactsPanel title="Market Cap" value="$2.8T" />
+          <QuickFactsPanel title="P/E Ratio" value="24.6" />
+          <QuickFactsPanel title="Volume" value="1.2M" />
+          <QuickFactsPanel title="Dividend Yield" value="1.5%" />
         </div>
 
         <AlertsPanel />

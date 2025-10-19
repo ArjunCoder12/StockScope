@@ -140,7 +140,7 @@
 
 /* Loading Text */
 .loading-text {
-  color: #0a0909;
+  color: var(--color-text-white);
   font-size: 0.95rem;
   font-weight: 400;
   margin: 0;

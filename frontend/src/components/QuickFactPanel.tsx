@@ -12,7 +12,7 @@ export default function QuickFactsPanel({ title, value }: QuickFactPanelProps) {
 
       {/*Panel content*/}
       <div className="dashboard-sector-trends">
-        <p>{value}</p>
+        <p style={{color: "white"}}>{value}</p>
         
       </div>
 

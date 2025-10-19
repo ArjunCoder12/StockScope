@@ -46,7 +46,7 @@
 
 .dashboard-stock-info-labels {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-lg);
@@ -58,7 +58,7 @@
 
 .dashboard-stock-info-data {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
     padding: var(--spacing-sm) 0;
 }
@@ -75,7 +75,12 @@
 }
 
 .stock-price {
-    font-weight: var(--font-weight-semibold);
+
+    color: var(--color-text-white);
+}
+
+.stock-news {
+    
     color: var(--color-text-white);
 }
 
@@ -87,6 +92,25 @@
 .stock-change-negative {
     color: #f44336;
     font-weight: var(--font-weight-semibold);
+}
+
+.dashboard-sector-trend-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border-medium);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-sector-trend-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: var(--spacing-lg) 0;
 }
 
 .dashboard-news-container {
