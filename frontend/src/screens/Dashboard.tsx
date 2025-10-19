@@ -3,6 +3,10 @@ import "../styles/Dashboard.css";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
 import AlertsPanel from "../components/AlertsPanel";
 import StockStatusPanel from "../components/StockStatusPanel";
+import SectorTrends from "../components/SectorTrendsPanel";
+import QuickFactPanel from "../components/QuickFactPanel";
+
+
 export default function Dashboard() {
   //Formatting date for stock info section
   const date = new Date();
@@ -23,7 +27,18 @@ export default function Dashboard() {
       <h2>Dashboard</h2>
 
       <div className="dashboard-grid">
-        <StockStatusPanel formattedDate={formattedDate} />
+        <div className="dashboard-panel" style={{ gridArea: "stockstatus" }}>
+          <StockStatusPanel formattedDate={formattedDate} />
+        </div>
+
+        <div className="dashboard-panel" style={{ gridArea: "sectortrends" }}>
+          <SectorTrends />
+        </div>
+
+        <div className="dashboard-panel" style={{ gridArea: "quickfacts" }}>
+          <QuickFactPanel title="Market Cap" value="$2.3T"/>
+        </div>
+
         <AlertsPanel />
       </div>
     </ResponsiveContainer>
