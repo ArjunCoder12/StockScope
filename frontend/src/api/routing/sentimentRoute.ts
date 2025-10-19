@@ -16,6 +16,19 @@ interface SentimentResponse {
 export const getSentiment = async (
   ticker: string
 ): Promise<SentimentResponse> => {
-  const response = await apiClient.get(`/sentiment/${ticker}`);
-  return response.data as SentimentResponse;
+  // Uncomment for testing without backend
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve({
+  //       status: "success",
+  //       data: [{ sentiment: "positive", confidence: 0.9, description: "The stock is performing well", ticker: "AAPL", lastUpdated: "2024-10-01" }],
+  //     });
+  //   }, 1000);
+  // });
+  const response = await apiClient.get(`/api/v1/sentiment/${ticker}`);
+  const data = response.data as SentimentResponse;
+  if (data.status === "error") {
+    throw new Error();
+  }
+  return data;
 };

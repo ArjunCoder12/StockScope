@@ -14,11 +14,10 @@ interface NewsResponse {
  * @returns The news for the given ticker
  */
 export const getNews = async (ticker: string): Promise<NewsResponse> => {
-  const response = await apiClient.get(`/news/${ticker}`);
-  return response.data as NewsResponse;
-};
-
-export const getAllNews = async (): Promise<NewsResponse> => {
-  const response = await apiClient.get(`/news`);
-  return response.data as NewsResponse;
+  const response = await apiClient.get(`/api/v1/news/${ticker}`);
+  const data = response.data as NewsResponse;
+  if (data.status === "error") {
+    throw new Error();
+  }
+  return data;
 };

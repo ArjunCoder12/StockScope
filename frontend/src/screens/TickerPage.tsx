@@ -1,7 +1,5 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import ChartPanel from "../components/ChartPanel";
-import AlertsPanel from "../components/AlertsPanel";
 import NewsPanel from "../components/NewsPanel";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
 import "../styles/Dashboard.css";
@@ -36,13 +34,10 @@ export default function TickerPage() {
 
       <div className="dashboard-grid">
         <div className="dashboard-panel">
-          <h3>{symbol} Chart</h3>
-          <ChartPanel title={`${symbol} Price Chart`} apiURL="" dataKey="" />
+          <ChartPanel ticker={symbol} />
         </div>
 
         <NewsPanel ticker={symbol} />
-
-        <AlertsPanel />
       </div>
     </ResponsiveContainer>
   );
