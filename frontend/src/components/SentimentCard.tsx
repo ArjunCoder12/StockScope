@@ -1,38 +1,54 @@
 import "../styles/SentimentCard.css";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
+import { useSentimentData } from "../api/hooks/generalHooks";
+import LoadingSpinner from "../structures/LoadingSpinner";
 
 interface SentimentCardProps {
-  sentiment: string;
-  confidence: string;
-  description: string;
   ticker: string;
-  lastUpdated: string;
-  containerProps?: React.CSSProperties;
 }
 
-export default function SentimentCard({
-  sentiment,
-  confidence,
-  description,
-  ticker,
-  lastUpdated,
-  containerProps,
-}: SentimentCardProps) {
-  const sentimentClass = getSentimentColor(sentiment);
+// Fallback data for testing/api not working
+const FALLBACK_SENTIMENT = {
+  sentiment: "neutral",
+  confidence: 0,
+  description: "Sentiment data unavailable. Please try again later.",
+  ticker: "",
+  lastUpdated: new Date().toLocaleDateString(),
+};
 
-  //How we would use the react query
-  // const { data, isLoading, error } = useSentimentData(ticker);
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
+export default function SentimentCard({ ticker }: SentimentCardProps) {
+  const { data: response, isLoading, error } = useSentimentData(ticker);
+
+  if (isLoading) {
+    return (
+      <ResponsiveContainer>
+        <div className="sentiment-card-loading">
+          <LoadingSpinner text="Loading sentiment data..." />
+        </div>
+      </ResponsiveContainer>
+    );
+  }
+
+  // Extract sentiment data or use fallback
+  const sentimentData = response?.data?.[0] || FALLBACK_SENTIMENT;
+  const isUsingFallback = !response?.data?.[0] || error;
+
+  const sentimentClass = getSentimentColor(sentimentData.sentiment);
+  const confidence = (sentimentData.confidence * 100).toFixed(0) + "%";
+  const description = sentimentData.description;
+  const lastUpdated = sentimentData.lastUpdated;
+
   return (
-    <ResponsiveContainer
-      style={{
-        ...containerProps,
-      }}
-    >
+    <ResponsiveContainer>
+      {isUsingFallback && (
+        <div className="sentiment-warning">Using demo data</div>
+      )}
       <div className={`sentiment-card ${sentimentClass}`}>
         <SentimentHeader ticker={ticker} lastUpdated={lastUpdated} />
-        <SentimentBody description={description} />
+        <SentimentBody
+          description={description}
+          sentiment={sentimentData.sentiment}
+        />
         <SentimentFooter confidence={confidence} />
       </div>
     </ResponsiveContainer>
@@ -59,11 +75,13 @@ function SentimentHeader({ ticker, lastUpdated }: SentimentHeaderProps) {
 // -- Sentiment Body --
 interface SentimentBodyProps {
   description: string;
+  sentiment: string;
 }
 
-function SentimentBody({ description }: SentimentBodyProps) {
+function SentimentBody({ description, sentiment }: SentimentBodyProps) {
   return (
     <div className="sentiment-body">
+      <div className="sentiment-badge">{sentiment.toUpperCase()}</div>
       <p className="sentiment-description">{description}</p>
     </div>
   );

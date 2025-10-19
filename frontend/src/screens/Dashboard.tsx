@@ -3,7 +3,6 @@ import "../styles/Dashboard.css";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
 import AlertsPanel from "../components/AlertsPanel";
 import StockStatusPanel from "../components/StockStatusPanel";
-import NewsPanel from "../components/NewsPanel";
 export default function Dashboard() {
   //Formatting date for stock info section
   const date = new Date();
@@ -25,7 +24,6 @@ export default function Dashboard() {
 
       <div className="dashboard-grid">
         <StockStatusPanel formattedDate={formattedDate} />
-        <NewsPanel />
         <AlertsPanel />
       </div>
     </ResponsiveContainer>
