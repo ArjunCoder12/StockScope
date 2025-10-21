@@ -3,10 +3,11 @@
 .dashboard-panel {
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-md);
-    background-color: var(--color-bg-white);
+    background-color: var(--color-bg-module-gray);
     padding: var(--spacing-xl);
     box-shadow: var(--shadow-md);
     transition: var(--transition-fast);
+    
 }
 
 .dashboard-panel:hover {
@@ -17,27 +18,35 @@
     margin: 0 0 var(--spacing-lg) 0;
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
+    color: var(--color-primary-gold);
     border-bottom: 1px solid var(--color-border-medium);
     padding-bottom: var(--spacing-sm);
 }
 
 .dashboard-grid {
-    display: grid;
-    flex: 1;
-    min-height: 0;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-5xl);
-    margin-top: var(--spacing-5xl);
-    margin-left: var(--spacing-xl);
-    margin-right: var(--spacing-xl);
-    margin-bottom: var(--spacing-5xl);
-    
+  display: grid;
+  gap: var(--spacing-5xl);
+  margin: var(--spacing-5xl) var(--spacing-xl);
+  grid-template-columns: 3fr 1fr; /* top row 3:1 */
+  grid-template-rows: auto auto;   /* two rows */
+  grid-template-areas:
+    "stockstatus sectortrends"   /* top row 3:1 */
+    "quickfacts alerts"; /* bottom row 1:1 */
+}
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "stockstatus"
+      "sectortrends"
+      "quickfacts"
+      "alerts";
+  }
 }
 
 .dashboard-stock-info-labels {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-lg);
@@ -49,7 +58,7 @@
 
 .dashboard-stock-info-data {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1rem;
     padding: var(--spacing-sm) 0;
 }
@@ -61,13 +70,18 @@
 }
 
 .stock-name {
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
 }
 
 .stock-price {
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-secondary);
+
+    color: var(--color-text-white);
+}
+
+.stock-news {
+    
+    color: var(--color-text-white);
 }
 
 .stock-change-positive {
@@ -78,6 +92,25 @@
 .stock-change-negative {
     color: #f44336;
     font-weight: var(--font-weight-semibold);
+}
+
+.dashboard-sector-trend-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border-medium);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-sector-trend-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: var(--spacing-lg) 0;
 }
 
 .dashboard-news-container {
@@ -114,59 +147,6 @@
     height: 60px;
     border-radius: var(--radius-sm);
     object-fit: cover;
-}
-
-.dashboard-news-title {
-    font-size: 16px;
-    margin: 0 0 8px 0;
-}
-
-.dashboard-news-description {
-    font-size: 14px;
-    color: #555;
-    margin: 0 0 8px 0;
-}
-
-.dashboard-news-timestamp {
-    font-size: 12px;
-    color: #888;
-    margin: 0;
-}
-
-.dashboard-news-sentiment-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: var(--spacing-lg);
-}
-
-.dashboard-news-more {
-    margin-top: 16px;
-    width: 100%;
-}
-
-.dashboard-news-more-title {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.dashboard-news-more-item {
-    margin-bottom: 8px;
-    padding: 8px;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-}
-
-.dashboard-news-more-item-title {
-    font-size: 12px;
-    margin: 0 0 4px 0;
-}
-
-.dashboard-news-more-item-meta {
-    font-size: 10px;
-    color: #666;
-    margin: 0;
 }
 
 .dashboard-alerts {

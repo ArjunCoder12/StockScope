@@ -80,6 +80,7 @@ function StockListHeader() {
       <div>Stock</div>
       <div>Price</div>
       <div>% Change</div>
+      <div>News</div>
     </div>
   );
 }
@@ -109,6 +110,7 @@ function StockRow({ stock }: { stock: StockListType }) {
         {changeSign}
         {stock.change.toFixed(1)}%
       </div>
+      <div className="stock-news">No News Yet</div>
     </>
   );
 }

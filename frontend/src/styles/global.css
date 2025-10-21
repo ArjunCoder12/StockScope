@@ -2,7 +2,7 @@
 
 :root {
   /* Brand Colors */
-  --color-primary-gold: #B8860B;
+  --color-primary-gold: #BFA85D;
   --color-primary-gold-light: #FFD700;
   --color-primary-gold-hover: #e8d5a5;
   --color-primary-black: #000000;
@@ -38,7 +38,7 @@
   /* Alert Colors */
   --color-alert-red: #dc2626;
   --color-alert-yellow: #f59e0b;
-  --color-alert-green: #10b981;
+  --color-alert-green: #25ce96;
 
   /* Shadow Colors */
   --shadow-light: rgba(0, 0, 0, 0.1);
@@ -50,7 +50,7 @@
   /* Text Colors */
   --color-text-primary: #1f2937;
   --color-text-secondary: #374151;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #BBBBBB;
   --color-text-white: #ffffff;
   --color-text-white-muted: rgba(255, 255, 255, 0.8);
   --color-text-white-strong: rgba(255, 255, 255, 0.95);
@@ -60,6 +60,8 @@
   --color-bg-white: rgb(255, 255, 255);
   --color-bg-overlay: rgba(255, 255, 255, 0.2);
   --color-bg-overlay-light: rgba(255, 255, 255, 0.3);
+  --color-bg-gray-dark: #242424;
+  --color-bg-module-gray: #2F2F2F;
 
   /* Gradient Definitions */
   --gradient-nav: linear-gradient(90deg, 
