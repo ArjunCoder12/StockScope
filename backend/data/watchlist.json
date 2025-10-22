@@ -18,5 +18,21 @@
   {
     "ticker": "MSFT",
     "name": "Microsoft Corporation"
+  },
+  {
+    "ticker": "META",
+    "name": "Meta Platforms Inc."
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corporation"
+  },
+  {
+    "ticker": "INTC",
+    "name": "Intel Corporation"
+  },
+  {
+    "ticker": "CSCO",
+    "name": "Cisco Systems, Inc."
   }
 ]
