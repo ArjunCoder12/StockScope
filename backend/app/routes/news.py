@@ -18,27 +18,36 @@ def _get_news_cached(ticker):
 def _set_news_cache(ticker, data):
     _NEWS_CACHE[ticker] = {"ts": time.time(), "data": data}
 def _format_article(ticker, item):
-    title = item.get("title") or ""
-    url = item.get("link") or item.get("url") or ""
-    description = item.get("summary") or item.get("description") or item.get("content") or ""
-
+    # Extract title from the correct location
+    title = item.get("title", "")
+    
+    # Extract URL - try multiple possible keys
+    url = ""
+    if "link" in item:
+        url = item["link"]
+    elif "canonicalUrl" in item and isinstance(item["canonicalUrl"], dict):
+        url = item["canonicalUrl"].get("url", "")
+    
+    # Extract description/summary
+    description = item.get("summary", "") or ""
+    
+    # Extract thumbnail image
     placeholder_img = "https://placehold.co/600x400"
     image = placeholder_img
-    thumb = item.get("thumbnail") or {}
-    resolutions = thumb.get("resolutions") or []
-    if isinstance(resolutions, list) and resolutions:
-        try:
-            image = (
-                sorted(
-                    resolutions,
-                    key=lambda r: r.get("width", 0) * r.get("height", 0)
-                )[-1].get("url")
-                or placeholder_img
-            )
-        except Exception:
-            image = placeholder_img
-    ts = item.get("published") or item.get("pubDate") or item.get("isoDate") or item.get("providerPublishTime") or item.get("pubDate") or item.get("published_at")
-    if isinstance(ts, int) or isinstance(ts, float):
+    thumb = item.get("thumbnail")
+    if thumb and isinstance(thumb, dict):
+        resolutions = thumb.get("resolutions", [])
+        if isinstance(resolutions, list) and resolutions:
+            try:
+                # Get the largest resolution for picture
+                largest = max(resolutions, key=lambda r: r.get("width", 0) * r.get("height", 0))
+                image = largest.get("url", placeholder_img)
+            except Exception:
+                image = placeholder_img
+    
+    # Extract timestamp
+    ts = item.get("providerPublishTime") or item.get("pubDate") or item.get("published")
+    if isinstance(ts, (int, float)):
         dt = datetime.fromtimestamp(ts, tz=timezone.utc)
     elif isinstance(ts, str):
         try:
@@ -47,12 +56,13 @@ def _format_article(ticker, item):
             dt = datetime.now(timezone.utc)
     else:
         dt = datetime.now(timezone.utc)
+    
     return {
         "ticker": ticker,
         "title": title,
         "description": description,
         "url": url,
-        "image": image or placeholder_img,
+        "image": image,
         "lastUpdated": dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
 
