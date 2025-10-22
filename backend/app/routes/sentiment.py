@@ -1,5 +1,12 @@
+import sys
+import os
+
+# Add the parent directory (Stockscope) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 from flask import Blueprint, jsonify
 from ..fetchers import get_price_data
+
+from nlp.sentiment import SentimentAnalyzer
 #.. goes one level up from the current routes/
 #app.fetchers is the absolute import, and there's no app/ above routes/ in the pack
 
@@ -20,11 +27,13 @@ def get_sentiment(ticker):
         return jsonify({"status": "error", "message": f"Ticker must be 1–5 characters long."}), 400
     elif not ticker.isalpha():
         return jsonify({"status": "error", "message": f"Ticker must contain letters only."}), 400
-    elif (ticker in mock_sentiment):
+    result = SentimentAnalyzer.analyze_sentiment(ticker)
+    if ("error" in result):
         return jsonify({
-            "status": "success",
-            "data": [mock_sentiment[ticker]]  # wrap in list for consistent format
-        }), 200
-    else:
-        return jsonify({"status": "error", "message": f"No data for ticker {ticker}"}), 404
+            "status": "error",
+            "message": result["error"],
+            "ticker": result.get("ticker")
+        }), 400
+    return jsonify(result), 200
+    
     
