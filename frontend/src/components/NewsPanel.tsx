@@ -1,5 +1,6 @@
+import "../styles/NewsPanel.css";
+
 import SentimentCard from "./SentimentCard";
-import "../styles/Dashboard.css";
 import { useNewsData } from "../api/hooks/generalHooks";
 import { NewsType } from "../api/types";
 import LoadingSpinner from "../structures/LoadingSpinner";
@@ -45,13 +46,12 @@ export default function NewsPanel({ ticker }: NewsPanelProps) {
 
         <FeaturedNewsItem newsItem={newsData[0]} />
 
-        <div className="dashboard-news-sentiment-container">
-          <SentimentCard ticker={ticker} />
-        </div>
-
         {newsData.length > 1 && (
           <AdditionalNewsList newsItems={newsData.slice(1, 4)} />
         )}
+      </div>
+      <div className="dashboard-news-sentiment-container">
+        <SentimentCard ticker={ticker} />
       </div>
     </div>
   );
@@ -83,8 +83,11 @@ function NoNewsCard({ ticker }: { ticker: string }) {
 
 // Featured news article
 function FeaturedNewsItem({ newsItem }: { newsItem: NewsType }) {
-  return (
-    <div className="dashboard-news-details">
+  const hasValidUrl =
+    newsItem.url && newsItem.url !== "#" && newsItem.url !== "";
+
+  const content = (
+    <>
       <div>
         <img
           src={newsItem.image || "https://placehold.co/600x400"}
@@ -99,8 +102,24 @@ function FeaturedNewsItem({ newsItem }: { newsItem: NewsType }) {
           Last updated: {new Date(newsItem.lastUpdated).toLocaleString()}
         </p>
       </div>
-    </div>
+    </>
   );
+
+  if (hasValidUrl) {
+    return (
+      <a
+        href={newsItem.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="dashboard-news-details"
+        style={{ textDecoration: "none", color: "inherit", display: "block" }}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="dashboard-news-details">{content}</div>;
 }
 
 // Additional news items list
@@ -119,13 +138,32 @@ function AdditionalNewsList({ newsItems }: { newsItems: NewsType[] }) {
 
 // Individual news list item
 function NewsListItem({ newsItem }: { newsItem: NewsType }) {
-  return (
-    <div className="dashboard-news-more-item">
+  const hasValidUrl =
+    newsItem.url && newsItem.url !== "#" && newsItem.url !== "";
+
+  const content = (
+    <>
       <h5 className="dashboard-news-more-item-title">{newsItem.title}</h5>
       <p className="dashboard-news-more-item-meta">
         {newsItem.ticker} •{" "}
         {new Date(newsItem.lastUpdated).toLocaleDateString()}
       </p>
-    </div>
+    </>
   );
+
+  if (hasValidUrl) {
+    return (
+      <a
+        href={newsItem.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="dashboard-news-more-item"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="dashboard-news-more-item">{content}</div>;
 }

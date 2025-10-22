@@ -1,0 +1,102 @@
+/* News Panel Styles */
+
+.dashboard-news-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.dashboard-news-sentiment-container {
+    margin-top: var(--spacing-md);
+}
+
+.dashboard-news-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+a.dashboard-news-details {
+    cursor: pointer;
+}
+
+a.dashboard-news-details:hover {
+    transform: translateX(4px);
+    opacity: 0.85;
+}
+
+.dashboard-news-details-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+
+.dashboard-news-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.dashboard-news-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.dashboard-news-timestamp {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.dashboard-news-more {
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--spacing-md);
+}
+
+.dashboard-news-more-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-news-more-item {
+    display: block;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+a.dashboard-news-more-item {
+    cursor: pointer;
+}
+
+a.dashboard-news-more-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-left: var(--spacing-sm);
+}
+
+.dashboard-news-more-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard-news-more-item-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-white);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.dashboard-news-more-item-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
