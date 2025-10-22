@@ -1,3 +1,5 @@
+import "../styles/StockStatusPanel.css";
+
 import { useStockList } from "../api/hooks/generalHooks";
 import { StockListType } from "../api/types";
 import LoadingSpinner from "../structures/LoadingSpinner";
@@ -31,10 +33,54 @@ const FALLBACK_STOCKS: StockListType[] = [
     status: "active",
   },
   {
-    ticker: "NVDA",
+    ticker: "RGTI",
     name: "NVIDIA Corp.",
     price: 485.6,
     change: 3.4,
+    status: "active",
+  },
+
+  {
+    ticker: "ACHR",
+    name: "Apple Inc.",
+    price: 178.25,
+    change: 2.5,
+    status: "active",
+  },
+
+  {
+    ticker: "QQQQ",
+    name: "Tesla Inc.",
+    price: 242.8,
+    change: -1.2,
+    status: "active",
+  },
+  {
+    ticker: "ABCD",
+    name: "Microsoft Corp.",
+    price: 378.9,
+    change: 0.8,
+    status: "active",
+  },
+  {
+    ticker: "GOOG",
+    name: "Apple Inc.",
+    price: 178.25,
+    change: 2.5,
+    status: "active",
+  },
+  {
+    ticker: "BACN",
+    name: "Tesla Inc.",
+    price: 242.8,
+    change: -1.2,
+    status: "active",
+  },
+  {
+    ticker: "JOBY",
+    name: "Microsoft Corp.",
+    price: 378.9,
+    change: 0.8,
     status: "active",
   },
 ];

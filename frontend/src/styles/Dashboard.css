@@ -1,171 +1,30 @@
+/* Dashboard Grid Layout */
+/* This file contains ONLY the grid layout for the dashboard */
 
-
-.dashboard-panel {
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-md);
-    background-color: var(--color-bg-module-gray);
-    padding: var(--spacing-xl);
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-fast);
-    
-}
-
-.dashboard-panel:hover {
-    transform: translateY(-4px) scale(1.02);
-}
-
-.dashboard-panel h3 {
-    margin: 0 0 var(--spacing-lg) 0;
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary-gold);
-    border-bottom: 1px solid var(--color-border-medium);
-    padding-bottom: var(--spacing-sm);
+/* Watchlist panel stays compact, doesn't stretch */
+.dashboard-grid > div[style*="watchlist"] {
+    height: fit-content;
+    align-self: start;
 }
 
 .dashboard-grid {
   display: grid;
-  gap: var(--spacing-5xl);
+  gap: var(--spacing-2xl);
   margin: var(--spacing-5xl) var(--spacing-xl);
-  grid-template-columns: 3fr 1fr; /* top row 3:1 */
-  grid-template-rows: auto auto;   /* two rows */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   grid-template-areas:
-    "stockstatus sectortrends"   /* top row 3:1 */
-    "quickfacts alerts"; /* bottom row 1:1 */
+    "stockstatus news"      /* Top row: Stock status left, News right */
+    "watchlist watchlist";  /* Bottom row: Watchlist spans full width */
 }
+
+/* Mobile responsive layout */
 @media (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
       "stockstatus"
-      "sectortrends"
-      "quickfacts"
-      "alerts";
+      "watchlist"
+      "news";
   }
-}
-
-.dashboard-stock-info-labels {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1rem;
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-lg);
-    color: var(--color-text-muted);
-    padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
-    border-bottom: 1px solid var(--color-border-medium);
-    margin-bottom: var(--spacing-sm);
-}
-
-.dashboard-stock-info-data {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1rem;
-    padding: var(--spacing-sm) 0;
-}
-
-.dashboard-stock-info-data > div {
-    padding: var(--spacing-sm) 0;
-    font-size: var(--font-size-xl);
-    border-bottom: 1px solid var(--color-gray-100);
-}
-
-.stock-name {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-white);
-}
-
-.stock-price {
-
-    color: var(--color-text-white);
-}
-
-.stock-news {
-    
-    color: var(--color-text-white);
-}
-
-.stock-change-positive {
-    color: #4caf50;
-    font-weight: var(--font-weight-semibold);
-}
-
-.stock-change-negative {
-    color: #f44336;
-    font-weight: var(--font-weight-semibold);
-}
-
-.dashboard-sector-trend-labels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-lg);
-    color: var(--color-text-muted);
-    padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
-    border-bottom: 1px solid var(--color-border-medium);
-    margin-bottom: var(--spacing-sm);
-}
-
-.dashboard-sector-trend-data {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: var(--spacing-lg) 0;
-}
-
-.dashboard-news-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.news-warning {
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.5rem;
-    background-color: rgba(255, 152, 0, 0.1);
-    border: 1px solid rgba(255, 152, 0, 0.3);
-    border-radius: 4px;
-    font-size: 0.85rem;
-    color: #ff9800;
-    text-align: center;
-    width: 100%;
-}
-
-.dashboard-news-details { /* contains both the image and the text divs */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-md);
-}
-
-.dashboard-news-details-image {
-    width: 60px;
-    height: 60px;
-    border-radius: var(--radius-sm);
-    object-fit: cover;
-}
-
-.dashboard-alerts {
-    margin-top: 0.75rem;   
-    display: flex;          
-    align-items: center;  
-    justify-content: center;  
-    gap: 2rem;          
-    color: var(--color-alert-red);     
-}
-
-.dashboard-alerts-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: var(--spacing-sm);
-}
-
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
 }

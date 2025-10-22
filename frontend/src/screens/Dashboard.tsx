@@ -1,10 +1,12 @@
 import "../styles/Dashboard.css";
+import "../styles/shared/panel.css";
 
 import ResponsiveContainer from "../structures/ResponsiveContainer";
-import AlertsPanel from "../components/AlertsPanel";
 import StockStatusPanel from "../components/StockStatusPanel";
-import SectorTrends from "../components/SectorTrendsPanel";
-import QuickFactsPanel from "../components/QuickFactPanel";
+import NewsPanel from "../components/NewsPanel";
+import LoadingSpinner from "../structures/LoadingSpinner";
+import { useStockList } from "../api/hooks/generalHooks";
+import WatchlistPanel from "../components/WatchlistPanel";
 
 export default function Dashboard() {
   //Formatting date for stock info section
@@ -15,6 +17,9 @@ export default function Dashboard() {
     day: "numeric",
   });
 
+  // Fetch stock list
+  const { data: stockListResponse, isLoading, error } = useStockList();
+
   return (
     <ResponsiveContainer
       style={{
@@ -23,25 +28,42 @@ export default function Dashboard() {
         backgroundColor: "rgba(28, 32, 29, 0.44)",
       }}
     >
-      <h2 style={{color: "white"}}>Dashboard</h2>
+      <h2 style={{ color: "white" }}>Dashboard</h2>
 
       <div className="dashboard-grid">
         <div className="dashboard-panel" style={{ gridArea: "stockstatus" }}>
           <StockStatusPanel formattedDate={formattedDate} />
         </div>
 
-        <div className="dashboard-panel" style={{ gridArea: "sectortrends" }}>
-          <SectorTrends />
+        <div className="dashboard-panel" style={{ gridArea: "news" }}>
+          {isLoading && <LoadingSpinner text="Loading stocks..." />}
+          {error && !isLoading && (
+            <>
+              <p style={{ color: "white" }}>
+                Error loading stocks. Showing default news.
+              </p>
+              <NewsPanel ticker="AAPL" />
+            </>
+          )}
+          {!isLoading && !error && <NewsPanel ticker="AAPL" />}
         </div>
 
-        <div className="dashboard-panel" style={{ gridArea: "quickfacts" }}>
+        <div className="dashboard-panel" style={{ gridArea: "watchlist" }}>
+          <WatchlistPanel />
+        </div>
+
+        {/* <div className="dashboard-panel" style={{ gridArea: "sectortrends" }}>
+          <SectorTrends />
+        </div> */}
+
+        {/* <div className="dashboard-panel" style={{ gridArea: "quickfacts" }}>
           <QuickFactsPanel title="Market Cap" value="$2.8T" />
           <QuickFactsPanel title="P/E Ratio" value="24.6" />
           <QuickFactsPanel title="Volume" value="1.2M" />
           <QuickFactsPanel title="Dividend Yield" value="1.5%" />
-        </div>
+        </div> */}
 
-        <AlertsPanel />
+        {/* <AlertsPanel /> */}
       </div>
     </ResponsiveContainer>
   );

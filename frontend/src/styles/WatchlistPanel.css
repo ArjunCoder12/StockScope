@@ -1,0 +1,90 @@
+/* Watchlist Panel Styles */
+
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    min-height: auto;
+}
+
+/* On small screens: limit height and make scrollable */
+@media (max-width: 768px) {
+    .watchlist-grid {
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* Add some padding for scrollbar */
+        padding-right: var(--spacing-xs);
+        /* Smooth scrolling */
+        scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar styling for mobile */
+    .watchlist-grid::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .watchlist-grid::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
+    }
+
+    .watchlist-grid::-webkit-scrollbar-thumb {
+        background: var(--color-primary-gold);
+        border-radius: 3px;
+    }
+
+    .watchlist-grid::-webkit-scrollbar-thumb:hover {
+        background: rgba(184, 134, 11, 0.8);
+    }
+}
+
+.watchlist-card {
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(184, 134, 11, 0.05));
+    border: 1px solid var(--color-primary-gold);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.watchlist-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.2), rgba(184, 134, 11, 0.1));
+}
+
+.watchlist-card-ticker {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-gold);
+    margin-bottom: var(--spacing-xs);
+}
+
+.watchlist-card-name {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-white);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.watchlist-empty {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
+.watchlist-empty p:first-child {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.watchlist-empty-hint {
+    font-size: var(--font-size-base);
+    opacity: 0.7;
+}
+

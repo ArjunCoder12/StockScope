@@ -1,0 +1,54 @@
+/* Stock Status Panel Styles */
+
+.dashboard-stock-info-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-white);  /* Changed to white for dark background */
+    text-align: center;
+    padding: var(--spacing-lg) 0 var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border-medium);
+    margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-stock-info-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: var(--spacing-sm) 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.dashboard-stock-info-data > div {
+    padding: var(--spacing-sm) 0;
+    font-size: var(--font-size-xl);
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.stock-name {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-white);
+}
+
+.stock-price {
+    color: var(--color-text-white-muted);  /* Changed for better visibility */
+}
+
+.stock-change-positive {
+    color: var(--color-alert-green);  /* Fixed: was --color-success */
+    font-weight: var(--font-weight-semibold);
+}
+
+.stock-change-negative {
+    color: var(--color-alert-red);
+    font-weight: var(--font-weight-semibold);
+}
+
+.stock-news {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
