@@ -5,10 +5,12 @@ import {
   CHARTING_DATA_KEY,
   SENTIMENT_DATA_KEY,
   NEWS_DATA_KEY,
+  WATCHLIST_KEY,
 } from "../constants";
 import { getCharting } from "../routing/chartingRoute";
 import { getSentiment } from "../routing/sentimentRoute";
 import { getNews } from "../routing/newsRoute";
+import { getWatchlist } from "../routing/watchlistRoute";
 
 /**
  * Get the stock list
@@ -18,7 +20,10 @@ export const useStockList = () => {
   return useQuery({
     queryKey: [STOCK_LIST_KEY],
     queryFn: getStockList,
-    staleTime: 1000, //10 seconds
+    staleTime: 60000, // 60 seconds (1 minute)
+    gcTime: 300000, // 300 seconds (5 minutes)
+    refetchOnWindowFocus: false, // Don't refetch when window regains focus
+    refetchOnMount: false, // Don't refetch when component mounts if data exists
   });
 };
 
@@ -29,10 +34,13 @@ export const useStockList = () => {
  */
 export const useChartingData = (ticker: string) => {
   return useQuery({
-    queryKey: [CHARTING_DATA_KEY, ticker], // ← Include ticker
+    queryKey: [CHARTING_DATA_KEY, ticker],
     queryFn: () => getCharting(ticker),
-    staleTime: 1000,
-    enabled: !!ticker, // ← Only fetch if ticker exists
+    staleTime: 60000, // 60 seconds (1 minute)
+    gcTime: 300000, // 300 seconds (5 minutes)
+    refetchOnWindowFocus: false, // Don't refetch when window regains focus
+    refetchOnMount: false, // Don't refetch when component mounts if data exists
+    enabled: !!ticker,
   });
 };
 
@@ -45,7 +53,10 @@ export const useSentimentData = (ticker: string) => {
   return useQuery({
     queryKey: [SENTIMENT_DATA_KEY, ticker],
     queryFn: () => getSentiment(ticker),
-    staleTime: 2000, //20 seconds
+    staleTime: 60000, // 60 seconds (1 minute)
+    gcTime: 300000, // 300 seconds (5 minutes)
+    refetchOnWindowFocus: false, // Don't refetch when window regains focus
+    refetchOnMount: false, // Don't refetch when component mounts if data exists
     enabled: !!ticker,
   });
 };
@@ -54,7 +65,21 @@ export const useNewsData = (ticker: string) => {
   return useQuery({
     queryKey: [NEWS_DATA_KEY, ticker],
     queryFn: () => getNews(ticker),
-    staleTime: 2000, //20 seconds
+    staleTime: 60000, // 60 seconds (1 minute)
+    gcTime: 300000, // 300 seconds (5 minutes)
+    refetchOnWindowFocus: false, // Don't refetch when window regains focus
+    refetchOnMount: false, // Don't refetch when component mounts if data exists
     enabled: !!ticker,
+  });
+};
+
+export const useWatchlist = () => {
+  return useQuery({
+    queryKey: [WATCHLIST_KEY],
+    queryFn: getWatchlist,
+    staleTime: 60000, // 60 seconds (1 minute)
+    gcTime: 300000, // 300 seconds (5 minutes)
+    refetchOnWindowFocus: false, // Don't refetch when window regains focus
+    refetchOnMount: false, // Don't refetch when component mounts if data exists
   });
 };
