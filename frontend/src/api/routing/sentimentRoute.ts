@@ -25,7 +25,7 @@ export const getSentiment = async (
   //     });
   //   }, 1000);
   // });
-  const response = await apiClient.get(`/api/v1/sentiment/${ticker}`);
+  const response = await apiClient.get(`/sentiment/${ticker}`);
   const data = response.data as SentimentResponse;
   if (data.status === "error") {
     throw new Error();

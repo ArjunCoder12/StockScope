@@ -41,3 +41,8 @@ export interface NewsType {
   image: string;
   lastUpdated: string;
 }
+
+export interface WatchlistType {
+  ticker: string;
+  name: string;
+}

@@ -27,7 +27,7 @@ export const getCharting = async (
   //   }, 1000);
   // });
 
-  const response = await apiClient.get(`/api/v1/charting/${ticker}`);
+  const response = await apiClient.get(`/charting/${ticker}`);
   const data = response.data as ChartingResponse;
   if (data.status === "error") {
     throw new Error();

@@ -12,7 +12,7 @@ interface StockListResponse {
  * @returns The list of stocks for a user
  */
 export const getStockList = async (): Promise<StockListResponse> => {
-  const response = await apiClient.get("/api/v1/stock-list");
+  const response = await apiClient.get(`/stock-list?limit=10`);
   const data = response.data as StockListResponse;
   if (data.status === "error") {
     throw new Error();
