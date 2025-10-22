@@ -62,12 +62,22 @@ interface SentimentHeaderProps {
 }
 
 function SentimentHeader({ ticker, lastUpdated }: SentimentHeaderProps) {
+  // Format the date string to be more readable
+  const formattedDate = new Date(lastUpdated).toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
   return (
     <div className="sentiment-header">
       <h3 className="sentiment-title">
         Sentiment Analysis: <span className="ticker-symbol">{ticker}</span>
       </h3>
-      <span className="last-updated">Last Updated: {lastUpdated}</span>
+      <span className="last-updated">Last Updated: {formattedDate}</span>
     </div>
   );
 }
