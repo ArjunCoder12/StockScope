@@ -34,7 +34,7 @@ def get_price_data(ticker, timeframe = "daily", interval = "5min"):
         params["outputsize"] = "compact"  # latest 100 points
     
     try:
-        response = requests.get(BASE_URL, params=params)
+        response = requests.get(BASE_URL, params=params, timeout=10)  # 10 second timeout
         response.raise_for_status()
         data = response.json()
         
