@@ -18,23 +18,29 @@ def _get_news_cached(ticker):
 def _set_news_cache(ticker, data):
     _NEWS_CACHE[ticker] = {"ts": time.time(), "data": data}
 def _format_article(ticker, item):
-    # Extract title from the correct location
-    title = item.get("title", "")
+    # yfinance now nests everything inside 'content'
+    content = item.get("content", {})
     
-    # Extract URL - try multiple possible keys
+    # Extract title
+    title = content.get("title", "")
+    
+    # Extract URL from canonicalUrl or clickThroughUrl
     url = ""
-    if "link" in item:
-        url = item["link"]
-    elif "canonicalUrl" in item and isinstance(item["canonicalUrl"], dict):
-        url = item["canonicalUrl"].get("url", "")
+    canonical = content.get("canonicalUrl", {})
+    if isinstance(canonical, dict) and canonical.get("url"):
+        url = canonical["url"]
+    else:
+        click_through = content.get("clickThroughUrl", {})
+        if isinstance(click_through, dict) and click_through.get("url"):
+            url = click_through["url"]
     
-    # Extract description/summary
-    description = item.get("summary", "") or ""
+    # Extract summary/description
+    description = content.get("summary", "") or content.get("description", "")
     
     # Extract thumbnail image
     placeholder_img = "https://placehold.co/600x400"
     image = placeholder_img
-    thumb = item.get("thumbnail")
+    thumb = content.get("thumbnail", {})
     if thumb and isinstance(thumb, dict):
         resolutions = thumb.get("resolutions", [])
         if isinstance(resolutions, list) and resolutions:
@@ -45,11 +51,9 @@ def _format_article(ticker, item):
             except Exception:
                 image = placeholder_img
     
-    # Extract timestamp
-    ts = item.get("providerPublishTime") or item.get("pubDate") or item.get("published")
-    if isinstance(ts, (int, float)):
-        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
-    elif isinstance(ts, str):
+    # Extract timestamp from pubDate or displayTime
+    ts = content.get("pubDate") or content.get("displayTime")
+    if isinstance(ts, str):
         try:
             dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
         except Exception:
