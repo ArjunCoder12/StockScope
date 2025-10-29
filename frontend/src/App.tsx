@@ -14,7 +14,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <div className="App">
-          <NavBar logo={""} />
+          <NavBar logo="/logo.png" />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/ticker/:symbol" element={<TickerPage />} />
