@@ -137,7 +137,7 @@ export default function NavBar({ logo }: NavBarProps) {
   return (
     <nav className="nav">
       <Link to="/" className="logo">
-        <img className="logo__img" src={logo} alt="logo" />
+        <img className="logo__img" src={logo} alt="StockScope logo" />
         <span className="logo__text">StockScope</span>
       </Link>
       <SearchBar />
