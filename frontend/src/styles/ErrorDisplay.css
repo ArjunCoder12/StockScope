@@ -1,0 +1,31 @@
+/* Error Display Component Styles */
+
+.error-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+}
+
+.error-display__retry {
+  background-color: var(--color-primary-gold);
+  color: var(--color-primary-black);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.error-display__retry:hover {
+  background-color: var(--color-primary-gold-hover);
+  transform: translateY(-2px);
+}
+
+.error-display__retry:active {
+  transform: translateY(0);
+}
+
