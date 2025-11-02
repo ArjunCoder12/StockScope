@@ -1,21 +1,15 @@
 import { apiClient } from "../apiClient";
-
-import { WatchlistType } from "../types";
-
-interface WatchlistResponse {
-  data: WatchlistType[];
-  status: string;
-}
+import { ApiResponse, WatchlistType } from "../types";
 
 /**
- * Get the list of stocks for a user
- * @returns The list of stocks for a user
+ * Get the watchlist for a user
+ * @returns The watchlist data
  */
-export const getWatchlist = async (): Promise<WatchlistResponse> => {
+export const getWatchlist = async (): Promise<ApiResponse<WatchlistType[]>> => {
   const response = await apiClient.get(`/watchlist`);
-  const data = response.data as WatchlistResponse;
+  const data = response.data as ApiResponse<WatchlistType[]>;
   if (data.status === "error") {
-    throw new Error();
+    throw new Error(data.message || "Failed to fetch watchlist");
   }
   return data;
 };

@@ -1,36 +1,18 @@
 import { apiClient } from "../apiClient";
+import { ApiResponse, PricePoint } from "../types";
 
-import { PricePoint } from "../types";
-
-interface ChartingResponse {
-  data: PricePoint[];
-  status: string;
-}
-
+/**
+ * Get charting data for a given ticker
+ * @param ticker - The ticker symbol to get charting data for
+ * @returns The charting data for the given ticker
+ */
 export const getCharting = async (
   ticker: string
-): Promise<ChartingResponse> => {
-  // Uncomment for testing without backend
-  // return new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve({
-  //       status: "success",
-  //       data: [
-  //         { date: "Oct 1", price: 178.25, volume: 45230000 },
-  //         { date: "Oct 2", price: 180.5, volume: 48920000 },
-  //         { date: "Oct 3", price: 179.85, volume: 42150000 },
-  //         { date: "Oct 4", price: 182.1, volume: 51340000 },
-  //         { date: "Oct 5", price: 181.75, volume: 46780000 },
-  //         { date: "Oct 8", price: 183.4, volume: 49560000 },
-  //       ],
-  //     });
-  //   }, 1000);
-  // });
-
+): Promise<ApiResponse<PricePoint[]>> => {
   const response = await apiClient.get(`/charting/${ticker}`);
-  const data = response.data as ChartingResponse;
+  const data = response.data as ApiResponse<PricePoint[]>;
   if (data.status === "error") {
-    throw new Error();
+    throw new Error(data.message || "Failed to fetch charting data");
   }
   return data;
 };
