@@ -1,5 +1,18 @@
 //TYPES FOR THE DATA THAT IS BEING RECEIVED FROM THE BACKEND
 
+/**
+ * Generic API response wrapper
+ * All API responses follow this structure
+ */
+export interface ApiResponse<T> {
+  data: T;
+  status: string;
+  message?: string;
+}
+
+/**
+ * Stock list item type
+ */
 export interface StockListType {
   price: number;
   ticker: string;

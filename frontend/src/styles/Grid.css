@@ -1,0 +1,14 @@
+/* Grid Component Styles */
+
+.grid {
+  display: grid;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 768px) {
+  .grid--responsive {
+    grid-template-columns: var(--grid-mobile-columns, 1fr) !important;
+    grid-template-areas: var(--grid-mobile-areas, none) !important;
+  }
+}
+

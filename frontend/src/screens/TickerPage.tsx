@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import ChartPanel from "../components/ChartPanel";
 import NewsPanel from "../components/NewsPanel";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
-import "../styles/Dashboard.css";
+import Grid from "../structures/Grid";
+import GridItem from "../structures/GridItem";
 
 export default function TickerPage() {
   const { symbol } = useParams<{ symbol: string }>();
@@ -30,15 +31,17 @@ export default function TickerPage() {
         backgroundColor: "rgba(28, 32, 29, 0.44)",
       }}
     >
-      <h2>{symbol} - Stock Details</h2>
+      <h2 style={{ color: "white" }}>{symbol} - Stock Details</h2>
 
-      <div className="dashboard-grid">
-        <div className="dashboard-panel">
+      <Grid areas={["chart news"]} mobileAreas={["chart", "news"]}>
+        <GridItem area="chart">
           <ChartPanel ticker={symbol} />
-        </div>
+        </GridItem>
 
-        <NewsPanel ticker={symbol} />
-      </div>
+        <GridItem area="news">
+          <NewsPanel ticker={symbol} />
+        </GridItem>
+      </Grid>
     </ResponsiveContainer>
   );
 }

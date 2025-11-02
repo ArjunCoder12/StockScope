@@ -1,7 +1,6 @@
-import "../styles/Dashboard.css";
-import "../styles/shared/panel.css";
-
 import ResponsiveContainer from "../structures/ResponsiveContainer";
+import Grid from "../structures/Grid";
+import GridItem from "../structures/GridItem";
 import StockStatusPanel from "../components/StockStatusPanel";
 import NewsPanel from "../components/NewsPanel";
 import LoadingSpinner from "../structures/LoadingSpinner";
@@ -17,8 +16,8 @@ export default function Dashboard() {
     day: "numeric",
   });
 
-  // Fetch stock list
-  const { data: stockListResponse, isLoading, error } = useStockList();
+  // Fetch stock list (for potential future use)
+  const { isLoading, error } = useStockList();
 
   return (
     <ResponsiveContainer
@@ -30,12 +29,15 @@ export default function Dashboard() {
     >
       <h2 style={{ color: "white" }}>Dashboard</h2>
 
-      <div className="dashboard-grid">
-        <div className="dashboard-panel" style={{ gridArea: "stockstatus" }}>
+      <Grid
+        areas={["stockstatus news", "watchlist watchlist"]}
+        mobileAreas={["stockstatus", "watchlist", "news"]}
+      >
+        <GridItem area="stockstatus">
           <StockStatusPanel formattedDate={formattedDate} />
-        </div>
+        </GridItem>
 
-        <div className="dashboard-panel" style={{ gridArea: "news" }}>
+        <GridItem area="news">
           {isLoading && <LoadingSpinner text="Loading stocks..." />}
           {error && !isLoading && (
             <>
@@ -46,49 +48,12 @@ export default function Dashboard() {
             </>
           )}
           {!isLoading && !error && <NewsPanel ticker="AAPL" />}
-        </div>
+        </GridItem>
 
-        <div className="dashboard-panel" style={{ gridArea: "watchlist" }}>
+        <GridItem area="watchlist" className="grid-item--watchlist">
           <WatchlistPanel />
-        </div>
-
-        {/* <div className="dashboard-panel" style={{ gridArea: "sectortrends" }}>
-          <SectorTrends />
-        </div> */}
-
-        {/* <div className="dashboard-panel" style={{ gridArea: "quickfacts" }}>
-          <QuickFactsPanel title="Market Cap" value="$2.8T" />
-          <QuickFactsPanel title="P/E Ratio" value="24.6" />
-          <QuickFactsPanel title="Volume" value="1.2M" />
-          <QuickFactsPanel title="Dividend Yield" value="1.5%" />
-        </div> */}
-
-        {/* <AlertsPanel /> */}
-      </div>
+        </GridItem>
+      </Grid>
     </ResponsiveContainer>
   );
 }
-
-/* STOCK CHART PANEL 
-
-CSS classes:
-- dashboard-panel
-
-*/
-// function StockChartPanel() {
-//   return (
-//     <div
-//       className="dashboard-panel"
-//       style={{
-//         display: "flex",
-//         flexDirection: "column",
-//         gap: "1rem",
-//       }}
-//     >
-//       <h3>Chart</h3>
-//       <ChartPanel title="Example" apiURL="" dataKey="" />
-
-//       {/* needs data to work properly */}
-//     </div>
-//   );
-// }
