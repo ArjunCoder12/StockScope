@@ -1,4 +1,25 @@
 /* Global CSS Variables for StockScope */
+/* 
+ * This file contains all design tokens and global CSS variables.
+ * Use these variables throughout the application instead of hardcoded values.
+ * 
+ * Organization:
+ * - Brand Colors
+ * - Neutral Colors
+ * - Border Colors
+ * - Sentiment Colors
+ * - Alert Colors
+ * - Shadow Colors
+ * - Text Colors
+ * - Background Colors
+ * - Gradients
+ * - Spacing
+ * - Border Radius
+ * - Font Sizes
+ * - Font Weights
+ * - Transitions
+ * - Box Shadows
+ */
 
 :root {
   /* Brand Colors */
