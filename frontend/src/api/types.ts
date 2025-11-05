@@ -59,3 +59,19 @@ export interface WatchlistType {
   ticker: string;
   name: string;
 }
+
+/**
+ * Price point data with technical indicators
+ * Extends PricePoint with indicator fields
+ */
+export interface IndicatorDataPoint extends PricePoint {
+  ema12?: number;
+  ema26?: number;
+  macd?: number;
+  signal?: number;
+  histogram?: number;
+  rsi?: number;
+  sma20?: number;
+  upperBand?: number;
+  lowerBand?: number;
+}
