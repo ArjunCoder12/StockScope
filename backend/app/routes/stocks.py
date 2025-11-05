@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 from .watchlist import load_watchlist
 from ..fetchers import get_price_data
 import threading
+from ..indicators.macd import calculate_macd
 
 # Stock list with pricing: loads persisted watchlist and enriches
 # with latest price and daily change. Supports q/limit filters.
@@ -61,6 +62,22 @@ def _update_cache_async(ticker):
             print(f"[CACHE ERROR] Failed to refresh {ticker}: {e}")
     threading.Thread(target=task, daemon=True).start()
 
+@stock_list_bp.route("/macd", methods = ["GET"])
+def get_macd():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper() #default AAPL
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key = lambda x: x["timestamp"]) #for each element x in the list, use x["timestamp"] to sort
+        macd_data = calculate_macd(prices)
+        return jsonify({"status": "success", "ticker": ticker, "data": macd_data}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 def _get_prices_cached(ticker):
     now = time.time()
