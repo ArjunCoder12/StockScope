@@ -6,16 +6,21 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
+  Line,
 } from "recharts";
+import { useState } from "react";
 
 import "../styles/ChartPanel.css";
+import "../styles/shared/panel.css";
 import { useChartingData } from "../api/hooks/generalHooks";
 import LoadingSpinner from "../structures/LoadingSpinner";
-import { PricePoint } from "../api/types";
+import { PricePoint, IndicatorDataPoint } from "../api/types";
 import WarningCard from "./WarningCard";
 
 interface ChartPanelProps {
   ticker: string; // Required: which stock to display
+  indicatorData?: IndicatorDataPoint[]; // Optional: indicator data to overlay
+  isUsingDemoData?: boolean; // Optional: indicates if using demo/fallback data
 }
 
 // Fallback data for testing/api not working
@@ -34,20 +39,49 @@ const FALLBACK_DATA: PricePoint[] = [
   { date: "Oct 16", price: 187.25, volume: 51230000 },
 ];
 
-export default function ChartPanel({ ticker }: ChartPanelProps) {
+export default function ChartPanel({
+  ticker,
+  indicatorData,
+  isUsingDemoData = false,
+}: ChartPanelProps) {
+  // Only fetch regular chart data if indicator data is not provided
   const { data: response, isLoading, error } = useChartingData(ticker);
+  const [showEMA, setShowEMA] = useState(false);
+  const [showMACD, setShowMACD] = useState(false);
+  const [showRSIBollinger, setShowRSIBollinger] = useState(false);
 
-  if (isLoading) {
+  // If indicator data is provided, skip loading state from regular chart data
+  if (isLoading && !indicatorData) {
     return <LoadingChartCard ticker={ticker} />;
   }
 
   const chartData = response?.data || FALLBACK_DATA;
-  const isUsingFallback: boolean = !response?.data || !!error;
+  const isUsingFallback: boolean =
+    isUsingDemoData || (!indicatorData && (!response?.data || !!error));
+
+  // Use indicator data if provided, otherwise use regular chart data
+  const dataWithIndicators = indicatorData || chartData;
 
   return (
-    <div>
+    <div className="dashboard-panel">
       <ChartHeader ticker={ticker} showWarning={isUsingFallback} />
-      <StockChart data={chartData} />
+      {indicatorData && (
+        <IndicatorToggles
+          showEMA={showEMA}
+          setShowEMA={setShowEMA}
+          showMACD={showMACD}
+          setShowMACD={setShowMACD}
+          showRSIBollinger={showRSIBollinger}
+          setShowRSIBollinger={setShowRSIBollinger}
+        />
+      )}
+      <StockChart
+        data={dataWithIndicators}
+        hasIndicators={!!indicatorData}
+        showEMA={showEMA}
+        showMACD={showMACD}
+        showRSIBollinger={showRSIBollinger}
+      />
     </div>
   );
 }
@@ -55,8 +89,8 @@ export default function ChartPanel({ ticker }: ChartPanelProps) {
 // Loading state component
 function LoadingChartCard({ ticker }: { ticker: string }) {
   return (
-    <div>
-      <h2>{`${ticker} Chart`}</h2>
+    <div className="dashboard-panel">
+      <h3>{`${ticker} Chart`}</h3>
       <div className="chart-container">
         <LoadingSpinner text="Loading chart data..." />
       </div>
@@ -74,14 +108,79 @@ function ChartHeader({
 }) {
   return (
     <>
-      <h2>{`${ticker} Chart`}</h2>
+      <h3>{`${ticker} Chart`}</h3>
       {showWarning && <WarningCard message="Using demo data" />}
     </>
   );
 }
 
+// Indicator toggle controls
+function IndicatorToggles({
+  showEMA,
+  setShowEMA,
+  showMACD,
+  setShowMACD,
+  showRSIBollinger,
+  setShowRSIBollinger,
+}: {
+  showEMA: boolean;
+  setShowEMA: (value: boolean) => void;
+  showMACD: boolean;
+  setShowMACD: (value: boolean) => void;
+  showRSIBollinger: boolean;
+  setShowRSIBollinger: (value: boolean) => void;
+}) {
+  return (
+    <div className="indicator-toggles">
+      <div className="indicator-toggle-group">
+        <label className="indicator-toggle-label">
+          <input
+            type="checkbox"
+            checked={showEMA}
+            onChange={(e) => setShowEMA(e.target.checked)}
+            className="indicator-checkbox"
+          />
+          <span>EMA (12, 26)</span>
+        </label>
+        <label className="indicator-toggle-label">
+          <input
+            type="checkbox"
+            checked={showMACD}
+            onChange={(e) => setShowMACD(e.target.checked)}
+            className="indicator-checkbox"
+          />
+          <span>MACD</span>
+        </label>
+        <label className="indicator-toggle-label">
+          <input
+            type="checkbox"
+            checked={showRSIBollinger}
+            onChange={(e) => setShowRSIBollinger(e.target.checked)}
+            className="indicator-checkbox"
+          />
+          <span>RSI / Bollinger Bands</span>
+        </label>
+      </div>
+    </div>
+  );
+}
+
 // Stock price chart
-function StockChart({ data }: { data: PricePoint[] }) {
+function StockChart({
+  data,
+  hasIndicators,
+  showEMA,
+  showMACD,
+  showRSIBollinger,
+}: {
+  data: (PricePoint | IndicatorDataPoint)[];
+  hasIndicators: boolean;
+  showEMA: boolean;
+  showMACD: boolean;
+  showRSIBollinger: boolean;
+}) {
+  const indicatorData = hasIndicators ? (data as IndicatorDataPoint[]) : null;
+
   return (
     <div className="chart-container">
       <ResponsiveContainer>
@@ -94,6 +193,107 @@ function StockChart({ data }: { data: PricePoint[] }) {
           <ChartAxes />
           <Tooltip />
           <ChartArea />
+          {hasIndicators && indicatorData && (
+            <>
+              {/* EMA Lines */}
+              {showEMA && (
+                <>
+                  {indicatorData.some((d) => d.ema12 !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="ema12"
+                      stroke="#2196F3"
+                      strokeWidth={2}
+                      dot={false}
+                      name="EMA 12"
+                    />
+                  )}
+                  {indicatorData.some((d) => d.ema26 !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="ema26"
+                      stroke="#FF9800"
+                      strokeWidth={2}
+                      dot={false}
+                      name="EMA 26"
+                    />
+                  )}
+                </>
+              )}
+              {/* MACD Lines */}
+              {showMACD && (
+                <>
+                  {indicatorData.some((d) => d.macd !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="macd"
+                      stroke="#9C27B0"
+                      strokeWidth={2}
+                      dot={false}
+                      name="MACD"
+                    />
+                  )}
+                  {indicatorData.some((d) => d.signal !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="signal"
+                      stroke="#E91E63"
+                      strokeWidth={2}
+                      dot={false}
+                      name="Signal"
+                    />
+                  )}
+                </>
+              )}
+              {/* RSI / Bollinger Bands */}
+              {showRSIBollinger && (
+                <>
+                  {indicatorData.some((d) => d.rsi !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="rsi"
+                      stroke="#FFC107"
+                      strokeWidth={2}
+                      dot={false}
+                      name="RSI"
+                    />
+                  )}
+                  {indicatorData.some((d) => d.sma20 !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="sma20"
+                      stroke="#00BCD4"
+                      strokeWidth={2}
+                      dot={false}
+                      name="SMA 20"
+                    />
+                  )}
+                  {indicatorData.some((d) => d.upperBand !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="upperBand"
+                      stroke="#9E9E9E"
+                      strokeWidth={1.5}
+                      strokeDasharray="5 5"
+                      dot={false}
+                      name="Upper Band"
+                    />
+                  )}
+                  {indicatorData.some((d) => d.lowerBand !== undefined) && (
+                    <Line
+                      type="monotone"
+                      dataKey="lowerBand"
+                      stroke="#9E9E9E"
+                      strokeWidth={1.5}
+                      strokeDasharray="5 5"
+                      dot={false}
+                      name="Lower Band"
+                    />
+                  )}
+                </>
+              )}
+            </>
+          )}
         </AreaChart>
       </ResponsiveContainer>
     </div>
