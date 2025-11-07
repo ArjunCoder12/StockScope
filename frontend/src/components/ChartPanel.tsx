@@ -7,6 +7,7 @@ import {
   AreaChart,
   Area,
   Line,
+  Legend,
 } from "recharts";
 import { useState } from "react";
 
@@ -22,6 +23,17 @@ interface ChartPanelProps {
   indicatorData?: IndicatorDataPoint[]; // Optional: indicator data to overlay
   isUsingDemoData?: boolean; // Optional: indicates if using demo/fallback data
 }
+
+const INDICATOR_COLORS = {
+  ema12: "#2196F3", // blue
+  ema26: "#FF9800", // orange
+  macd: "#9C27B0", // purple
+  signal: "#E91E63", // pink
+  rsi: "#FFC107", // amber
+  sma20: "#00BCD4", // cyan
+  upperBand: "#9E9E9E", // gray
+  lowerBand: "#9E9E9E", // gray
+};
 
 // Fallback data for testing/api not working
 const FALLBACK_DATA: PricePoint[] = [
@@ -181,6 +193,7 @@ function StockChart({
 }) {
   const indicatorData = hasIndicators ? (data as IndicatorDataPoint[]) : null;
 
+  
   return (
     <div className="chart-container">
       <ResponsiveContainer>
@@ -193,6 +206,19 @@ function StockChart({
           <ChartAxes />
           <Tooltip />
           <ChartArea />
+
+          {/* Legend on side (static but color-coded) */}
+          <Legend
+            align="right"
+            verticalAlign="middle"
+            layout="vertical"
+            wrapperStyle={{
+              paddingLeft: 30,
+              color: "#D9D9D9",
+              fontSize: "0.85rem",
+            }}
+          />
+          
           {hasIndicators && indicatorData && (
             <>
               {/* EMA Lines */}
