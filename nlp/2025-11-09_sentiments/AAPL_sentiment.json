@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "AAPL",
+            "sentiment": "neutral",
+            "confidence": 0.77,
+            "aggregate_scores": {
+                "positive": 0.19967171135795878,
+                "negative": 0.029600376342285364,
+                "neutral": 0.7707279122997559
+            },
+            "description": "Mixed or neutral sentiment for AAPL. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.",
+            "lastUpdated": "2025-11-09T06:42:46.214590+00:00"
+        }
+    ]
+}

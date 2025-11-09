@@ -3,6 +3,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from datetime import datetime, timezone
 import numpy as np
+import json
+import os
 
 MODEL_NAME = "ProsusAI/finbert"
 
@@ -30,15 +32,18 @@ class SentimentAnalyzer:
             stock = yf.Ticker(ticker)
             headlines_data = stock.news
             print(f"DEBUG: yfinance returned {len(headlines_data)} news items for {ticker}")
-            if len(headlines_data) > 0:
-                print(f"DEBUG: Structure of first item: {headlines_data[0]}")
+            
             if not headlines_data:
                 return self.format_output(ticker, {"positive": 0.33, "neutral": 0.34, "negative": 0.33}, 
                                           "neutral", 0.5, "No recent news found for ticker.")
 
             headlines = []
-            for item in headlines_data[:15]:
+            
+            for i, item in enumerate(headlines_data[:15]):
                 title = item.get('content', {}).get('title')
+                
+                print(f"DEBUG: Processing item {i} for {ticker}: {title}")
+                
                 if title:
                     headlines.append(title)
                     
@@ -78,7 +83,7 @@ class SentimentAnalyzer:
         except ValueError as e:
             return {"status": "error", "message": str(e), "ticker": ticker}
         except Exception as e:
-            return {"status": "error", "message": f"Unexpected error: {e}", "ticker": ticker}
+            return {"status": "error","message": f"Unexpected error: {e}", "ticker": ticker}
 
     def format_output(self, ticker, weights, sentiment, confidence, description):
         return {
@@ -99,10 +104,31 @@ if __name__ == "__main__":
     
     analyzer = SentimentAnalyzer()
     
-    aapl_sentiment = analyzer.analyze_sentiment("AAPL")
-    print("\n--- AAPL (Apple) ---")
-    print(aapl_sentiment)
+    tickers_to_analyze = ["AAPL", "TSLA", "MRK", "TTWO"]
     
-    tsla_sentiment = analyzer.analyze_sentiment("TSLA")
-    print("\n--- TSLA (Tesla) ---")
-    print(tsla_sentiment)
+    folder_name = datetime.now().strftime("%Y-%m-%d_sentiments")
+
+    try:
+        os.makedirs(folder_name, exist_ok=True)
+        print(f"DEBUG: Using directory '{folder_name}' for results.")
+    except Exception as e:
+        print(f"Could not create directory '{folder_name}'. Error: {e}")
+        exit()
+
+    for ticker in tickers_to_analyze:
+        print(f"\n--- Analyzing {ticker} ---")
+        sentiment_data = analyzer.analyze_sentiment(ticker)
+        
+        print(f"--- Results for {ticker} ---")
+        print(sentiment_data)
+        
+        filename = f"{ticker}_sentiment.json"
+        
+        full_path = os.path.join(folder_name, filename)
+        
+        try:
+            with open(full_path, 'w') as f:
+                json.dump(sentiment_data, f, indent=4)
+            print(f"Successfully saved results to {full_path}")
+        except Exception as e:
+            print(f"Error saving file to {full_path}: {e}")
