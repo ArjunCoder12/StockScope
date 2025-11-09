@@ -4,6 +4,7 @@ from .watchlist import load_watchlist
 from ..fetchers import get_price_data
 import threading
 from ..indicators.macd import calculate_macd
+from ..indicators.rsi import calculate_rsi
 
 # Stock list with pricing: loads persisted watchlist and enriches
 # with latest price and daily change. Supports q/limit filters.
@@ -76,6 +77,24 @@ def get_macd():
         prices.sort(key = lambda x: x["timestamp"]) #for each element x in the list, use x["timestamp"] to sort
         macd_data = calculate_macd(prices)
         return jsonify({"status": "success", "ticker": ticker, "data": macd_data}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+@stock_list_bp.route("/rsi", methods=["GET"])
+def get_rsi():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper()  # default AAPL
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key=lambda x: x["timestamp"])  #for each element x in the list, use x["timestamp"] to sort
+        rsi_data = calculate_rsi(prices)
+
+        return jsonify({"status": "success", "ticker": ticker, "data": rsi_data}), 200
+
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
