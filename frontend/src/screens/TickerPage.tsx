@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import ChartPanel from "../components/ChartPanel";
 import NewsPanel from "../components/NewsPanel";
+import SummaryCard from "../components/SummaryCard";
 import ResponsiveContainer from "../structures/ResponsiveContainer";
 import Grid from "../structures/Grid";
 import GridItem from "../structures/GridItem";
@@ -33,7 +34,13 @@ export default function TickerPage() {
     >
       <h2 style={{ color: "white" }}>{symbol} - Stock Details</h2>
 
-      <Grid areas={["chart news"]} mobileAreas={["chart", "news"]}>
+      <Grid
+        areas={["chart news", "summary summary"]}
+        mobileAreas={["summary", "chart", "news"]}
+      >
+        <GridItem area="summary">
+          <SummaryCard ticker={symbol} />
+        </GridItem>
         <GridItem area="chart">
           <ChartPanel ticker={symbol} />
         </GridItem>
