@@ -60,6 +60,11 @@ export interface WatchlistType {
   name: string;
 }
 
+export interface SummaryType {
+  summary: string;
+  ticker?: string;
+}
+
 /**
  * Price point data with technical indicators
  * Extends PricePoint with indicator fields

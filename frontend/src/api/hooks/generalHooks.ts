@@ -7,6 +7,7 @@ import {
   SENTIMENT_DATA_KEY,
   NEWS_DATA_KEY,
   WATCHLIST_KEY,
+  SUMMARY_DATA_KEY,
 } from "../constants";
 import {
   getCharting,
@@ -15,6 +16,7 @@ import {
 import { getSentiment } from "../routing/sentimentRoute";
 import { getNews } from "../routing/newsRoute";
 import { getWatchlist } from "../routing/watchlistRoute";
+import { getSummary } from "../routing/summaryRoute";
 import { queryConfig } from "../config/queryConfig";
 
 /**
@@ -100,5 +102,20 @@ export const useWatchlist = () => {
     queryFn: getWatchlist,
     staleTime: queryConfig.staleTime,
     gcTime: queryConfig.gcTime,
+  });
+};
+
+/**
+ * Get the summary data for a given ticker
+ * @param ticker - The ticker symbol to get summary data for
+ * @returns The summary data for the given ticker
+ */
+export const useSummaryData = (ticker: string) => {
+  return useQuery({
+    queryKey: [SUMMARY_DATA_KEY, ticker],
+    queryFn: () => getSummary(ticker),
+    staleTime: queryConfig.staleTime,
+    gcTime: queryConfig.gcTime,
+    enabled: !!ticker,
   });
 };
