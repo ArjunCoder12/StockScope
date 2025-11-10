@@ -1,0 +1,118 @@
+/* Loading State */
+.summary-card-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: var(--spacing-xl);
+}
+
+/* Warning Banner */
+.summary-warning {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #ff9800;
+  text-align: center;
+}
+
+.summary-card {
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-neutral);
+  color: var(--color-text-white);
+  box-shadow: var(--shadow-xl);
+  transition: var(--transition-normal);
+}
+
+.summary-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.summary-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-bg-overlay-light);
+}
+
+.summary-title {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ticker-symbol {
+  background: var(--color-bg-overlay);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  margin-left: var(--spacing-sm);
+}
+
+.summary-body {
+  margin-bottom: var(--spacing-lg);
+}
+
+.summary-text {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.6;
+  color: var(--color-text-white-strong);
+  text-shadow: 0 2px 4px var(--shadow-strong), 0 1px 2px var(--shadow-medium);
+  letter-spacing: 0.3px;
+  overflow-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; /* System fonts for crispness */
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .summary-card {
+    width: 50%;
+    padding: var(--spacing-lg);
+  }
+  
+  .summary-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .summary-text {
+    font-size: var(--font-size-md);
+    line-height: 1.5;
+  }
+  
+  .ticker-symbol {
+    font-size: var(--font-size-base);
+    padding: 3px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-card {
+    width: 90%;
+    padding: var(--spacing-md);
+  }
+  
+  .summary-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .summary-text {
+    font-size: var(--font-size-base);
+    line-height: 1.4;
+  }
+  
+  .ticker-symbol {
+    font-size: var(--font-size-sm);
+    padding: 2px 5px;
+  }
+}
+
