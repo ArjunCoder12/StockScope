@@ -55,10 +55,10 @@ def fetch_news_sentiment(ticker):
     except Exception as e:
         print(f"Error fetching news sentiment: {e}")
         return []
-    def fetch_summary(ticker):
-        return {
-            "ticker": ticker,
-            "price_history": fetch_price_history(ticker),
-            "company_info": fetch_company_info(ticker),
-            "news_sentiment": fetch_news_sentiment(ticker)
-        }
+def fetch_summary(ticker):
+    return {
+        "ticker": ticker,
+        "price_history": fetch_price_history(ticker),
+        "company_info": fetch_company_info(ticker),
+        "news_sentiment": fetch_news_sentiment(ticker)
+    }
