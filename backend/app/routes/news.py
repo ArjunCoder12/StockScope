@@ -18,41 +18,55 @@ def _get_news_cached(ticker):
 def _set_news_cache(ticker, data):
     _NEWS_CACHE[ticker] = {"ts": time.time(), "data": data}
 def _format_article(ticker, item):
-    title = item.get("title") or ""
-    url = item.get("link") or item.get("url") or ""
-    description = item.get("summary") or item.get("description") or item.get("content") or ""
-
+    # yfinance now nests everything inside 'content'
+    content = item.get("content", {})
+    
+    # Extract title
+    title = content.get("title", "")
+    
+    # Extract URL from canonicalUrl or clickThroughUrl
+    url = ""
+    canonical = content.get("canonicalUrl", {})
+    if isinstance(canonical, dict) and canonical.get("url"):
+        url = canonical["url"]
+    else:
+        click_through = content.get("clickThroughUrl", {})
+        if isinstance(click_through, dict) and click_through.get("url"):
+            url = click_through["url"]
+    
+    # Extract summary/description
+    description = content.get("summary", "") or content.get("description", "")
+    
+    # Extract thumbnail image
     placeholder_img = "https://placehold.co/600x400"
     image = placeholder_img
-    thumb = item.get("thumbnail") or {}
-    resolutions = thumb.get("resolutions") or []
-    if isinstance(resolutions, list) and resolutions:
-        try:
-            image = (
-                sorted(
-                    resolutions,
-                    key=lambda r: r.get("width", 0) * r.get("height", 0)
-                )[-1].get("url")
-                or placeholder_img
-            )
-        except Exception:
-            image = placeholder_img
-    ts = item.get("published") or item.get("pubDate") or item.get("isoDate") or item.get("providerPublishTime") or item.get("pubDate") or item.get("published_at")
-    if isinstance(ts, int) or isinstance(ts, float):
-        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
-    elif isinstance(ts, str):
+    thumb = content.get("thumbnail", {})
+    if thumb and isinstance(thumb, dict):
+        resolutions = thumb.get("resolutions", [])
+        if isinstance(resolutions, list) and resolutions:
+            try:
+                # Get the largest resolution for picture
+                largest = max(resolutions, key=lambda r: r.get("width", 0) * r.get("height", 0))
+                image = largest.get("url", placeholder_img)
+            except Exception:
+                image = placeholder_img
+    
+    # Extract timestamp from pubDate or displayTime
+    ts = content.get("pubDate") or content.get("displayTime")
+    if isinstance(ts, str):
         try:
             dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
         except Exception:
             dt = datetime.now(timezone.utc)
     else:
         dt = datetime.now(timezone.utc)
+    
     return {
         "ticker": ticker,
         "title": title,
         "description": description,
         "url": url,
-        "image": image or placeholder_img,
+        "image": image,
         "lastUpdated": dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
 

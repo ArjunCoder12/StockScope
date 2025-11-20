@@ -3,9 +3,6 @@ from flask import Blueprint, jsonify, request
 from .watchlist import load_watchlist
 from ..fetchers import get_price_data
 import threading
-from ..indicators.macd import calculate_macd
-from ..indicators.rsi import calculate_rsi
-from ..indicators.bollingerbands import calculate_bollinger_bands
 
 # Stock list with pricing: loads persisted watchlist and enriches
 # with latest price and daily change. Supports q/limit filters.
@@ -52,6 +49,17 @@ def get_stock_list():
 
 _CACHE = {}
 _CACHE_TTL = 300
+
+def _update_cache_async(ticker):
+    """Refresh ticker data in the background."""
+    def task():
+        try:
+            data = get_price_data(ticker, "daily")
+            _CACHE[ticker] = {"ts": time.time(), "data": data}
+            print(f"[CACHE REFRESHED] {ticker}")
+        except Exception as e:
+            print(f"[CACHE ERROR] Failed to refresh {ticker}: {e}")
+    threading.Thread(target=task, daemon=True).start()
 
 def _update_cache_async(ticker):
     """Refresh ticker data in the background."""

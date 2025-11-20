@@ -1,0 +1,27 @@
+/* Shared Panel Styles */
+/* Used across all dashboard panels */
+
+.dashboard-panel {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-module-gray);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-panel:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.dashboard-panel h3 {
+    margin: 0 0 var(--spacing-lg) 0;
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-gold);
+    border-bottom: 1px solid var(--color-border-medium);
+    padding-bottom: var(--spacing-sm);
+}
+

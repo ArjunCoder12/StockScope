@@ -1,0 +1,145 @@
+/* Global CSS Variables for StockScope */
+/* 
+ * This file contains all design tokens and global CSS variables.
+ * Use these variables throughout the application instead of hardcoded values.
+ * 
+ * Organization:
+ * - Brand Colors
+ * - Neutral Colors
+ * - Border Colors
+ * - Sentiment Colors
+ * - Alert Colors
+ * - Shadow Colors
+ * - Text Colors
+ * - Background Colors
+ * - Gradients
+ * - Spacing
+ * - Border Radius
+ * - Font Sizes
+ * - Font Weights
+ * - Transitions
+ * - Box Shadows
+ */
+
+:root {
+  /* Brand Colors */
+  --color-primary-gold: #BFA85D;
+  --color-primary-gold-light: #FFD700;
+  --color-primary-gold-hover: #e8d5a5;
+  --color-primary-black: #000000;
+  --color-primary-dark-gray: #2A2A2A;
+  --color-primary-light-gray: #090909;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Border Colors */
+  --color-border-light: #e2e8f0;
+  --color-border-medium: #e5e7eb;
+  --color-border-dark: #d1d5db;
+
+  /* Sentiment Colors */
+  --color-bullish-primary: #10b981;
+  --color-bullish-secondary: #22644f;
+  --color-bearish-primary: #ef4444;
+  --color-bearish-secondary: #751e1e;
+  --color-neutral-primary: #a78b5b;
+  --color-neutral-secondary: #62371c;
+
+  /* Alert Colors */
+  --color-alert-red: #dc2626;
+  --color-alert-yellow: #f59e0b;
+  --color-alert-green: #25ce96;
+
+  /* Shadow Colors */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-dark: rgba(0, 0, 0, 0.25);
+  --shadow-strong: rgba(0, 0, 0, 0.3);
+  --shadow-very-dark: rgba(0, 0, 0, 0.5);
+
+  /* Text Colors */
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #374151;
+  --color-text-muted: #BBBBBB;
+  --color-text-white: #ffffff;
+  --color-text-white-muted: rgba(255, 255, 255, 0.8);
+  --color-text-white-strong: rgba(255, 255, 255, 0.95);
+  --color-text-white-transparent: rgba(255, 255, 255, 0.75);
+
+  /* Background Colors */
+  --color-bg-white: rgb(255, 255, 255);
+  --color-bg-overlay: rgba(255, 255, 255, 0.2);
+  --color-bg-overlay-light: rgba(255, 255, 255, 0.3);
+  --color-bg-gray-dark: #242424;
+  --color-bg-module-gray: #2F2F2F;
+
+  /* Gradient Definitions */
+  --gradient-nav: linear-gradient(90deg, 
+    var(--color-primary-black) 0%, 
+    var(--color-primary-dark-gray) 20%, 
+    var(--color-primary-gold) 40%, 
+    var(--color-primary-gold) 60%, 
+    var(--color-primary-dark-gray) 80%, 
+    var(--color-primary-black) 100%
+  );
+
+  --gradient-bullish: linear-gradient(95deg, var(--color-bullish-primary) 0%, var(--color-bullish-secondary) 100%);
+  --gradient-bearish: linear-gradient(135deg, var(--color-bearish-primary) 0%, var(--color-bearish-secondary) 100%);
+  --gradient-neutral: linear-gradient(135deg, var(--color-neutral-primary) 0%, var(--color-neutral-secondary) 100%);
+  --gradient-gold: linear-gradient(90deg, var(--color-primary-gold), var(--color-primary-gold-light), var(--color-primary-gold));
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  --spacing-4xl: 40px;
+  --spacing-5xl: 50px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Font Sizes */
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 12px;
+  --font-size-md: 13px;
+  --font-size-lg: 14px;
+  --font-size-xl: 15px;
+  --font-size-2xl: 16px;
+  --font-size-3xl: 18px;
+  --font-size-4xl: 30px;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.4s ease;
+
+  /* Box Shadows */
+  --shadow-sm: 0 2px 4px -1px var(--shadow-light), 0 2px 4px -1px var(--shadow-light);
+  --shadow-md: 0 4px 6px -1px var(--shadow-light), 0 2px 4px -1px var(--shadow-light);
+  --shadow-lg: 0 12px 30px var(--shadow-dark), 0 6px 15px var(--shadow-medium);
+  --shadow-xl: 0 0 10px 0 var(--shadow-very-dark);
+  --shadow-nav: 0 3px 2px var(--shadow-strong);
+}
