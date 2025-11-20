@@ -61,6 +61,71 @@ def _update_cache_async(ticker):
             print(f"[CACHE ERROR] Failed to refresh {ticker}: {e}")
     threading.Thread(target=task, daemon=True).start()
 
+def _update_cache_async(ticker):
+    """Refresh ticker data in the background."""
+    def task():
+        try:
+            data = get_price_data(ticker, "daily")
+            _CACHE[ticker] = {"ts": time.time(), "data": data}
+            print(f"[CACHE REFRESHED] {ticker}")
+        except Exception as e:
+            print(f"[CACHE ERROR] Failed to refresh {ticker}: {e}")
+    threading.Thread(target=task, daemon=True).start()
+
+@stock_list_bp.route("/macd", methods = ["GET"])
+def get_macd():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper() #default AAPL
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key = lambda x: x["timestamp"]) #for each element x in the list, use x["timestamp"] to sort
+        macd_data = calculate_macd(prices)
+        return jsonify({"status": "success", "ticker": ticker, "data": macd_data}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+@stock_list_bp.route("/rsi", methods=["GET"])
+def get_rsi():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper()  # default AAPL
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key=lambda x: x["timestamp"])  #for each element x in the list, use x["timestamp"] to sort
+        rsi_data = calculate_rsi(prices)
+
+        return jsonify({"status": "success", "ticker": ticker, "data": rsi_data}), 200
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@stock_list_bp.route("/bollinger-bands", methods=["GET"])
+def get_bollinger_bands():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper()  # default AAPL
+        period = int(request.args.get("period", 20))  # default period 20
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key=lambda x: x["timestamp"])  #for each element x in the list, use x["timestamp"] to sort
+        bb_data = calculate_bollinger_bands(prices, period=period)
+
+        return jsonify({"status": "success", "ticker": ticker, "data": bb_data}), 200
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 def _get_prices_cached(ticker):
     now = time.time()

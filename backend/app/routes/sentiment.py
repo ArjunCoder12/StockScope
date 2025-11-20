@@ -1,3 +1,8 @@
+import sys
+import os
+
+# Add the parent directory (Stockscope) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 from flask import Blueprint, jsonify
 from ..fetchers import get_price_data
 from pathlib import Path
