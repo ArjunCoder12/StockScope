@@ -1,23 +1,18 @@
 import { apiClient } from "../apiClient";
-import { NewsType } from "../types";
-
-//This interface design allows us to control what information is being recieved.
-//Rather than guessing, we are explicitly defining the data that is being recieved.so
-interface NewsResponse {
-  data: NewsType[];
-  status: string;
-}
+import { ApiResponse, NewsType } from "../types";
 
 /**
  * Get news for a given ticker
  * @param ticker - The ticker symbol to get news for
  * @returns The news for the given ticker
  */
-export const getNews = async (ticker: string): Promise<NewsResponse> => {
+export const getNews = async (
+  ticker: string
+): Promise<ApiResponse<NewsType[]>> => {
   const response = await apiClient.get(`/news/${ticker}`);
-  const data = response.data as NewsResponse;
+  const data = response.data as ApiResponse<NewsType[]>;
   if (data.status === "error") {
-    throw new Error();
+    throw new Error(data.message || "Failed to fetch news");
   }
   return data;
 };

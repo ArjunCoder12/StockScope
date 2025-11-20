@@ -1,5 +1,18 @@
 //TYPES FOR THE DATA THAT IS BEING RECEIVED FROM THE BACKEND
 
+/**
+ * Generic API response wrapper
+ * All API responses follow this structure
+ */
+export interface ApiResponse<T> {
+  data: T;
+  status: string;
+  message?: string;
+}
+
+/**
+ * Stock list item type
+ */
 export interface StockListType {
   price: number;
   ticker: string;
@@ -45,4 +58,25 @@ export interface NewsType {
 export interface WatchlistType {
   ticker: string;
   name: string;
+}
+
+export interface SummaryType {
+  summary: string;
+  ticker?: string;
+}
+
+/**
+ * Price point data with technical indicators
+ * Extends PricePoint with indicator fields
+ */
+export interface IndicatorDataPoint extends PricePoint {
+  ema12?: number;
+  ema26?: number;
+  macd?: number;
+  signal?: number;
+  histogram?: number;
+  rsi?: number;
+  sma20?: number;
+  upperBand?: number;
+  lowerBand?: number;
 }
