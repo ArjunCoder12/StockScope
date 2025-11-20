@@ -5,6 +5,7 @@ from ..fetchers import get_price_data
 import threading
 from ..indicators.macd import calculate_macd
 from ..indicators.rsi import calculate_rsi
+from ..indicators.bollingerbands import calculate_bollinger_bands
 
 # Stock list with pricing: loads persisted watchlist and enriches
 # with latest price and daily change. Supports q/limit filters.
@@ -94,6 +95,26 @@ def get_rsi():
         rsi_data = calculate_rsi(prices)
 
         return jsonify({"status": "success", "ticker": ticker, "data": rsi_data}), 200
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@stock_list_bp.route("/bollinger-bands", methods=["GET"])
+def get_bollinger_bands():
+    try:
+        ticker = request.args.get("ticker", "AAPL").upper()  # default AAPL
+        period = int(request.args.get("period", 20))  # default period 20
+        data = _get_prices_cached(ticker)
+        if not data:
+            return jsonify({"status": "error", "message": f"No data for {ticker}"}), 404
+        prices = [
+            {"timestamp": date, "close": float(values["4. close"])}
+            for date, values in data.items()
+        ]
+        prices.sort(key=lambda x: x["timestamp"])  #for each element x in the list, use x["timestamp"] to sort
+        bb_data = calculate_bollinger_bands(prices, period=period)
+
+        return jsonify({"status": "success", "ticker": ticker, "data": bb_data}), 200
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
