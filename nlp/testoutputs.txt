@@ -1,0 +1,46 @@
+11/09/2025:
+
+DEBUG: yfinance returned 10 news items for AAPL
+DEBUG: Processing item 0 for AAPL: Elon Musk's pay package is a clear signal that Tesla is done being just a car company
+DEBUG: Processing item 1 for AAPL: Today's AI boom is 'very different' from the 90s dot-com bubble
+DEBUG: Processing item 2 for AAPL: Earnings To Watch: Jamf (JAMF) Reports Q3 Results Tomorrow
+DEBUG: Processing item 3 for AAPL: Apple Is Berkshire Hathaway's Largest Holding by Value. But Is the California-Based Company Still a Strong Play for Long-Term Growth?
+DEBUG: Processing item 4 for AAPL: Prediction: This Supercharged Growth Stock Will Join Nvidia, Apple, Microsoft, and Alphabet in the $3 Trillion Club Before 2028
+DEBUG: Processing item 5 for AAPL: How Analysts See Globalstar’s Story Changing Amid Sale Talks and New Spectrum Opportunities
+DEBUG: Processing item 6 for AAPL: Why Apple Stock Might Be Spared If an AI Bubble Bursts
+DEBUG: Processing item 7 for AAPL: Every payment method Costco accepts: From EBT to Apple Pay
+DEBUG: Processing item 8 for AAPL: As Warren Buffett Waves Goodbye – 5 Dividend Stocks That Never Leave Berkshire Hathaway
+DEBUG: Processing item 9 for AAPL: Apple’s iPhone Air Is a Marketing Win and a Sales Flop
+
+--- AAPL (Apple) ---
+{'status': 'success', 'data': [{'ticker': 'AAPL', 'sentiment': 'neutral', 'confidence': 0.77, 'aggregate_scores': {'positive': 0.19967171135795878, 'negative': 0.029600376342285364, 'neutral': 0.7707279122997559}, 'description': 'Mixed or neutral sentiment for AAPL. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.', 'lastUpdated': '2025-11-09T06:22:43.504338+00:00'}]}
+
+DEBUG: yfinance returned 10 news items for TSLA
+DEBUG: Processing item 0 for TSLA: Elon Musk's pay package is a clear signal that Tesla is done being just a car company
+DEBUG: Processing item 1 for TSLA: Today's AI boom is 'very different' from the 90s dot-com bubble
+DEBUG: Processing item 2 for TSLA: Prediction: EV Stocks Will Be Your Best Investment in 2026. Here's Why.
+DEBUG: Processing item 3 for TSLA: Elon Musk Says Optimus Robot Will Replace Jobs and Enable Universal Income
+DEBUG: Processing item 4 for TSLA: Elon Musk Says Tesla's Optimus Will Be An 'Infinite Money Glitch' That Ends Poverty, Performs Surgery, And Looks So Real 'You'll Need To Poke It'
+DEBUG: Processing item 5 for TSLA: These American Politicians Are Buying Tesla (TSLA)
+DEBUG: Processing item 6 for TSLA: The Weekend: Markets tank as AI bubble fears grow, while Musk celebrates record pay day
+DEBUG: Processing item 7 for TSLA: Elon Musk warns Mamdani policies and ‘low’ universal income would trigger ‘catastrophic decline’ in US living standards
+DEBUG: Processing item 8 for TSLA: Tesla’s Musk sees FSD winning full China approval in early 2026
+DEBUG: Processing item 9 for TSLA: $878B pay package for Elon Musk approved. What to know about Tesla, Boring Co CEO
+
+--- TSLA (Tesla) ---
+{'status': 'success', 'data': [{'ticker': 'TSLA', 'sentiment': 'neutral', 'confidence': 0.62, 'aggregate_scores': {'positive': 0.21482946508395082, 'negative': 0.16036600647720667, 'neutral': 0.6248045284388425}, 'description': 'Mixed or neutral sentiment for TSLA. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.', 'lastUpdated': '2025-11-09T06:22:43.897220+00:00'}]}
+
+DEBUG: yfinance returned 10 news items for TTWO
+DEBUG: Processing item 0 for TTWO: Take-Two Interactive Software (TTWO): Valuation Perspectives After GTA VI Delay and Earnings Beat
+DEBUG: Processing item 1 for TTWO: Nasdaq Logs Worst Week Since March Amid Tech Valuation Worries
+DEBUG: Processing item 2 for TTWO: S&P 500 Posts Weekly Loss, Breaking Win Streak Amid Drop in Consumer Sentiment
+DEBUG: Processing item 3 for TTWO: S&P 500 Gains and Losses Today: Take-Two Stock Falls; Expedia Soars on Resilient Travel Demand
+DEBUG: Processing item 4 for TTWO: US Equity Markets Close Mixed Amid Schumer's Proposal, Drop in Consumer Sentiment
+DEBUG: Processing item 5 for TTWO: These Stocks Moved the Most Today: Tesla, Expedia, Take-Two, Block, Affirm, Sunrun, Globus Medical, JFrog, and More
+DEBUG: Processing item 6 for TTWO: Take-Two Just Delayed GTA 6... Again. Is TTWO Stock About to Break Its Key 200-Day Moving Average?
+DEBUG: Processing item 7 for TTWO: Sector Update: Tech Stocks Fall Late Afternoon
+DEBUG: Processing item 8 for TTWO: Take-Two Stock Nosedives -- GTA 6 Delay Sparks Investor Panic
+DEBUG: Processing item 9 for TTWO: Equities Fall Intraday Amid Continued Tech Weakness, Souring Consumer Sentiment
+
+--- TTWO (Take-Two) ---
+{'status': 'success', 'data': [{'ticker': 'TTWO', 'sentiment': 'negative', 'confidence': 0.68, 'aggregate_scores': {'positive': 0.07221578860443673, 'negative': 0.6754213621871274, 'neutral': 0.25236284920843577}, 'description': 'Bearish sentiment detected for TTWO. Recent headlines may be focused on poor earnings, regulatory challenges, or analyst downgrades.', 'lastUpdated': '2025-11-09T06:29:46.017658+00:00'}]}
