@@ -1,6 +1,6 @@
 import time
 from .fetchers import get_price_data
-
+from nlp.summarizer import SentimentAnalyzer, MarketDataFetcher, GeminiSummarizer
 # cache to avoid repeated API calls
 _CACHE = {}
 _CACHE_TTL = 300
@@ -46,10 +46,8 @@ def fetch_news_sentiment(ticker):
         return _CACHE[key]["data"]
 
     try:
-        data = [
-            {"title": f"{ticker} hits new high!", "sentiment": "positive"},
-            {"title": f"{ticker} faces supply issues", "sentiment": "negative"},
-        ]
+        sentiment_engine = SentimentAnalyzer()
+        data = sentiment_engine.analyze_sentiment(ticker)
         _CACHE[key] = {"ts": now, "data": data}
         return data
     except Exception as e:
