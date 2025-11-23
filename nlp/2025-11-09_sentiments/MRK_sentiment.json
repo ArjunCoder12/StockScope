@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "MRK",
+            "sentiment": "positive",
+            "confidence": 0.52,
+            "aggregate_scores": {
+                "positive": 0.5235465628473984,
+                "negative": 0.024012769877577615,
+                "neutral": 0.45244066727502397
+            },
+            "description": "Strong bullish sentiment detected for MRK. Recent news headlines are broadly positive, focusing on growth, earnings beats, or positive analyst ratings.",
+            "lastUpdated": "2025-11-09T06:42:46.798333+00:00"
+        }
+    ]
+}

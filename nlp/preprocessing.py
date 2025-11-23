@@ -36,7 +36,7 @@ if __name__ == "__main__":
     print(sample_headline1)
     print("-" * 30)
     
-    processed_tokens = preprocess_pipeline(sample_headline2)
+    processed_tokens = preprocess_pipeline(sample_headline1)
     
     print("Processed Tokens:")
     print(processed_tokens)

@@ -13,11 +13,11 @@ class SentimentAnalyzer:
         try:
             # validate ticket
             if not ticker:
-                raise ValueError("Ticker does not exist")
+                raise ValueError("Ticker cannot be empty")
 
-            #validate the ticker if not uppercase
-            if not ticker.isalpha():
-                raise ValueError("Invalid ticker symbol")
+            # A more flexible check: ensures it's uppercase and has no lowercase
+            if not ticker.isupper():
+                raise ValueError("Invalid ticker format: should be uppercase")
             
             #probability of each of the market situations
 
