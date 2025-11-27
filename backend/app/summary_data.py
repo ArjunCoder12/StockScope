@@ -57,6 +57,7 @@ def fetch_news_sentiment(ticker):
     except Exception as e:
         print(f"Error fetching news sentiment: {e}")
         return []
+    
 def fetch_news_summary(ticker): 
     key = f"news_sum_{ticker}"
     now = time.time()
@@ -78,11 +79,36 @@ def fetch_news_summary(ticker):
     except Exception as e:
         print(f"Error fetching Gemini summary {ticker}: {e}")
         return []
+    
+    
 def fetch_summary(ticker):
+    company_info = fetch_company_info(ticker)
+
+    price_history = fetch_price_history(ticker)
+    chart_snapshot = {}
+
+    try:
+        # price_history[-1] means the last entry, check if price history exist and it has close price
+        if price_history and "close" in price_history[-1]:
+            first = price_history[0]["close"] #oldest closing price
+            last = price_history[-1]["close"] #latest closing price
+            chart_snapshot = {
+                "latest_price": last,
+                "first_price": first,
+                "change_pct": round((last - first) / first * 100, 2)
+            }
+    except Exception:
+        chart_snapshot = {}
+
+    news_sentiment = fetch_news_sentiment(ticker)
+
+    news_summary = fetch_news_summary(ticker)
+
     return {
         "ticker": ticker,
-        "price_history": fetch_price_history(ticker),
-        "company_info": fetch_company_info(ticker),
-        "news_sentiment": fetch_news_sentiment(ticker),
-        "news_summary": fetch_news_summary(ticker)
+        "price_history": price_history,
+        "company_info": company_info,
+        "news_sentiment": news_sentiment,
+        "news_summary": news_summary,
+        "chart_snapshot": chart_snapshot
     }
