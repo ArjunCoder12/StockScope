@@ -1,5 +1,5 @@
 import time
-from .fetchers import get_price_data
+from app.fetchers import get_price_data
 from nlp.summarizer import SentimentAnalyzer, MarketDataFetcher, GeminiSummarizer
 import os
 # cache to avoid repeated API calls
@@ -84,14 +84,19 @@ def fetch_news_summary(ticker):
 def fetch_summary(ticker):
     company_info = fetch_company_info(ticker)
 
-    price_history = fetch_price_history(ticker)
+    price_history_dict = fetch_price_history(ticker)
+    price_history_list = [
+        {"date": date, "close": float(values["4. close"])}
+        for date, values in price_history_dict.items()
+    ]
+    price_history_list.sort(key = lambda x: x["date"])
     chart_snapshot = {}
 
     try:
         # price_history[-1] means the last entry, check if price history exist and it has close price
-        if price_history and "close" in price_history[-1]:
-            first = price_history[0]["close"] #oldest closing price
-            last = price_history[-1]["close"] #latest closing price
+        if price_history_list:
+            first = price_history_list[0]["close"] #oldest closing price
+            last = price_history_list[-1]["close"] #latest closing price
             chart_snapshot = {
                 "latest_price": last,
                 "first_price": first,
@@ -106,7 +111,7 @@ def fetch_summary(ticker):
 
     return {
         "ticker": ticker,
-        "price_history": price_history,
+        "price_history": price_history_list,
         "company_info": company_info,
         "news_sentiment": news_sentiment,
         "news_summary": news_summary,
