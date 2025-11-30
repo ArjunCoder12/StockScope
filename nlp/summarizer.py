@@ -177,7 +177,7 @@ if __name__ == "__main__":
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "ui_card_data": {
                 "summary_text": ai_summary,
-                "badge_color": "green" if sent_result.get('sentiment') == "positive" else "red",
+                "badge_color": "green" if sent_result.get('sentiment') == "positive" else "yellow" if sent_result.get('sentiment') == "neutral" else "red",
                 "display_sentiment": sent_result.get('sentiment'),
             },
             "raw_data": {
