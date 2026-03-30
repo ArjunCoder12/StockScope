@@ -1,11 +1,17 @@
 from flask import Blueprint, jsonify
 
-hello_bp = Blueprint('hello', __name__)
+bp = Blueprint('hello', __name__)
 
-@hello_bp.route('/health', methods=['GET'])
+@bp.route('/health', methods=['GET'])
 def health():
-    return jsonify({"status": "healthy", "service": "StockScope Backend"})
+    """Health check endpoint.
+    Returns a small JSON object indicating service health.
+    """
+    return jsonify(status='healthy', service='StockScope Backend')
 
-@hello_bp.route('/hello', methods=['GET'])
+@bp.route('/hello', methods=['GET'])
 def hello():
-    return jsonify({"message": "Hello StockScope", "status": "success"})
+    """Hello endpoint.
+    Returns a small JSON object with a greeting message.
+    """
+    return jsonify(message='Hello StockScope', status='success')
