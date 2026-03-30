@@ -23,11 +23,13 @@ MANIFEST
 
 # Virtual environments
 venv/
+.venv/
+myenv/
 env/
 ENV/
 env.bak/
 venv.bak/
-
+torchvenv
 # Node.js
 node_modules/
 npm-debug.log*

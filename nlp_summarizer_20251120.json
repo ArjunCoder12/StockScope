@@ -1,0 +1,98 @@
+{
+  "status": "success",
+  "payload": [
+    {
+      "ticker": "AAPL",
+      "timestamp": "2025-11-20T22:12:35.136374+00:00",
+      "ui_card_data": {
+        "summary_text": "AAPL is currently trading at $266.25 amidst a neutral market sentiment derived from recent headlines. The stock carries a P/E ratio of 35.64, which combined with a 'buy' analyst recommendation, suggests a premium for future growth. Growth-focused traders may eye potential catalysts to justify its valuation and leverage future expansion.",
+        "badge_color": "red",
+        "display_sentiment": "neutral"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "neutral",
+          "confidence": 0.7,
+          "weights": {
+            "positive": 0.13178589039083824,
+            "negative": 0.16459537288227855,
+            "neutral": 0.7036187367268832
+          },
+          "description": "Based on 10 recent headlines. Dominant sentiment is neutral.",
+          "headline_count": 10
+        },
+        "fundamentals": {
+          "current_price": 266.25,
+          "market_cap": 3951253782528,
+          "trailing_pe": 35.64257,
+          "forward_pe": 32.03971,
+          "52_week_high": 277.32,
+          "52_week_low": 169.21,
+          "recommendation": "buy"
+        }
+      }
+    },
+    {
+      "ticker": "TSLA",
+      "timestamp": "2025-11-20T22:12:39.547815+00:00",
+      "ui_card_data": {
+        "summary_text": "TSLA holds a neutral market sentiment based on recent headlines, trading at $395.23. Its high P/E ratio of 272.57, coupled with a 'hold' analyst recommendation, suggests caution amidst this neutral outlook. Growth traders should monitor for clear catalysts or a more attractive entry point to align with long-term growth potential.",
+        "badge_color": "red",
+        "display_sentiment": "neutral"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "neutral",
+          "confidence": 0.63,
+          "weights": {
+            "positive": 0.15961165250505052,
+            "negative": 0.20941538484646724,
+            "neutral": 0.6309729626484822
+          },
+          "description": "Based on 10 recent headlines. Dominant sentiment is neutral.",
+          "headline_count": 10
+        },
+        "fundamentals": {
+          "current_price": 395.23,
+          "market_cap": 1314463547392,
+          "trailing_pe": 272.57242,
+          "forward_pe": 121.98457,
+          "52_week_high": 488.54,
+          "52_week_low": 214.25,
+          "recommendation": "hold"
+        }
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "timestamp": "2025-11-20T22:12:47.198423+00:00",
+      "ui_card_data": {
+        "summary_text": "NVDA currently trades at $180.64 amidst a neutral market sentiment based on recent headlines. Its elevated P/E of 44.6 suggests high growth expectations are already priced in, warranting careful observation for catalysts. Despite the neutral headline sentiment, analysts maintain a 'strong buy' rating, suggesting continued upside potential for growth traders monitoring sector innovation and market leadership.",
+        "badge_color": "red",
+        "display_sentiment": "neutral"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "neutral",
+          "confidence": 0.61,
+          "weights": {
+            "positive": 0.11471631145699225,
+            "negative": 0.27996380388574915,
+            "neutral": 0.6053198846572586
+          },
+          "description": "Based on 10 recent headlines. Dominant sentiment is neutral.",
+          "headline_count": 10
+        },
+        "fundamentals": {
+          "current_price": 180.64,
+          "market_cap": 4405368193024,
+          "trailing_pe": 44.602467,
+          "forward_pe": 43.84466,
+          "52_week_high": 212.19,
+          "52_week_low": 86.62,
+          "recommendation": "strong_buy"
+        }
+      }
+    }
+  ]
+}

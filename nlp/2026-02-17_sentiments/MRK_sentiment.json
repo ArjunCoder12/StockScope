@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "MRK",
+            "sentiment": "neutral",
+            "confidence": 0.45,
+            "aggregate_scores": {
+                "positive": 0.3820286805042231,
+                "negative": 0.16466239585466372,
+                "neutral": 0.45330892364111314
+            },
+            "description": "Mixed or neutral sentiment for MRK. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.",
+            "lastUpdated": "2026-02-18T00:09:54.345851+00:00"
+        }
+    ]
+}

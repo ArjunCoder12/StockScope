@@ -1,0 +1,149 @@
+/* Loading Spinner Container */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.loading-spinner-container--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(28, 32, 29, 0.8);
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+/* Spinner Variant */
+.loading-spinner {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-top-color: #4caf50;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner--small {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.loading-spinner--medium {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.loading-spinner--large {
+  width: 60px;
+  height: 60px;
+  border-width: 5px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dots Variant */
+.loading-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.loading-dots--small .loading-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.loading-dots--medium .loading-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.loading-dots--large .loading-dot {
+  width: 14px;
+  height: 14px;
+}
+
+.loading-dot {
+  border-radius: 50%;
+  background-color: #4caf50;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Pulse Variant */
+.loading-pulse {
+  border-radius: 50%;
+  background-color: #4caf50;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.loading-pulse--small {
+  width: 20px;
+  height: 20px;
+}
+
+.loading-pulse--medium {
+  width: 40px;
+  height: 40px;
+}
+
+.loading-pulse--large {
+  width: 60px;
+  height: 60px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* Loading Text */
+.loading-text {
+  color: var(--color-text-white);
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.9;
+}
+

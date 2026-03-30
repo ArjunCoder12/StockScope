@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "TTWO",
+            "sentiment": "neutral",
+            "confidence": 0.71,
+            "aggregate_scores": {
+                "positive": 0.0870236738265534,
+                "negative": 0.1982510818858425,
+                "neutral": 0.7147252442876041
+            },
+            "description": "Mixed or neutral sentiment for TTWO. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.",
+            "lastUpdated": "2026-02-18T00:09:54.579117+00:00"
+        }
+    ]
+}

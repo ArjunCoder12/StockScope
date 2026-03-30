@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "TSLA",
+            "sentiment": "neutral",
+            "confidence": 0.61,
+            "aggregate_scores": {
+                "positive": 0.16937341276565715,
+                "negative": 0.22281660301586373,
+                "neutral": 0.6078099842184791
+            },
+            "description": "Mixed or neutral sentiment for TSLA. News flow appears balanced or lacks significant market-moving events, leading to a wait-and-see outlook.",
+            "lastUpdated": "2025-11-13T14:46:50.074101+00:00"
+        }
+    ]
+}

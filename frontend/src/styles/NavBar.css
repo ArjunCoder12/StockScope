@@ -1,0 +1,164 @@
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--gradient-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-nav);
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-left: 20px;
+}
+.logo__img {
+  color: var(--color-primary-gold);
+  font-weight: var(--font-weight-medium);
+}
+.logo__text {
+  display: block;
+  color: var(--color-primary-gold);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-4xl);
+}
+
+
+.nav__list {
+  display: flex;
+  column-gap: 40px;
+  margin-right: 20px;
+  padding: 0;
+}
+
+.nav__link {
+  color: var(--color-text-white-transparent);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
+  transition: var(--transition-slow);
+  position: relative;
+}
+
+.nav__link:hover,
+.nav__link:focus {
+  color: var(--color-primary-gold-hover);
+}
+
+.nav__link::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  /* background-color: #5e4609; */
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  transition: all 0.2s;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--gradient-gold);
+  transition: width 0.3s ease;
+}
+
+.nav__link:hover::after {
+  opacity: 1;
+}
+
+/* Search Bar Styles */
+.nav__search {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 20px;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Override ticker search input styles for navbar */
+.nav__search .ticker-search-input {
+  padding: 8px 40px 8px 12px;
+  font-size: var(--font-size-lg);
+}
+
+.nav__search .ticker-search-icon {
+  right: 12px;
+  font-size: var(--font-size-lg);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Override ticker search dropdown styles for navbar */
+.nav__search .ticker-suggestions-dropdown {
+  margin-top: 4px;
+}
+
+.nav__search .ticker-suggestion-symbol {
+  font-size: var(--font-size-lg);
+}
+
+.nav__search .ticker-suggestion-name {
+  max-width: 200px;
+}
+
+.logo__img {
+  height: 40px;
+}
+
+@media (max-width: 650px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+  }
+  
+  .logo {
+    padding: 6px;
+    margin: 0;
+  }
+  
+  .logo__text {
+    color: var(--color-primary-light-gray);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-2xl);
+  }
+
+  .nav__list {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    column-gap: 20px;
+    row-gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__search {
+    max-width: calc(100% - 40px);
+    margin: 6px 20px;
+    order: -1;
+  }
+
+  .suggestion-name {
+    max-width: 150px;
+  }
+}

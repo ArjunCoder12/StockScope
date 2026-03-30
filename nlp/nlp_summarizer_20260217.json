@@ -1,0 +1,98 @@
+{
+  "status": "success",
+  "payload": [
+    {
+      "ticker": "AAPL",
+      "timestamp": "2026-02-18T00:11:13.468414+00:00",
+      "ui_card_data": {
+        "summary_text": "AI Summarizer not configured.",
+        "badge_color": "yellow",
+        "display_sentiment": "neutral"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "neutral",
+          "confidence": 0.45,
+          "weights": {
+            "positive": 0.2628518719330988,
+            "negative": 0.29186947023479554,
+            "neutral": 0.4452786578321057
+          },
+          "description": "Based on 10 recent headlines. Dominant sentiment is neutral.",
+          "headline_count": 10
+        },
+        "fundamentals": {
+          "current_price": 263.88,
+          "market_cap": 3878488637440,
+          "trailing_pe": 33.40253,
+          "forward_pe": 28.423677,
+          "52_week_high": 288.62,
+          "52_week_low": 169.21,
+          "recommendation": "buy"
+        }
+      }
+    },
+    {
+      "ticker": "TSLA",
+      "timestamp": "2026-02-18T00:11:14.016739+00:00",
+      "ui_card_data": {
+        "summary_text": "AI Summarizer not configured.",
+        "badge_color": "yellow",
+        "display_sentiment": "neutral"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "neutral",
+          "confidence": 0.86,
+          "weights": {
+            "positive": 0.1263341702905451,
+            "negative": 0.015572245525960994,
+            "neutral": 0.8580935841834939
+          },
+          "description": "Based on 1 recent headlines. Dominant sentiment is neutral.",
+          "headline_count": 1
+        },
+        "fundamentals": {
+          "current_price": 410.63,
+          "market_cap": 1540861067264,
+          "trailing_pe": 376.72476,
+          "forward_pe": 146.42766,
+          "52_week_high": 498.83,
+          "52_week_low": 214.25,
+          "recommendation": "hold"
+        }
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "timestamp": "2026-02-18T00:11:14.544089+00:00",
+      "ui_card_data": {
+        "summary_text": "AI Summarizer not configured.",
+        "badge_color": "green",
+        "display_sentiment": "positive"
+      },
+      "raw_data": {
+        "sentiment": {
+          "sentiment": "positive",
+          "confidence": 0.47,
+          "weights": {
+            "positive": 0.46857184171676636,
+            "negative": 0.16861698031425476,
+            "neutral": 0.3628111779689789
+          },
+          "description": "Based on 10 recent headlines. Dominant sentiment is positive.",
+          "headline_count": 10
+        },
+        "fundamentals": {
+          "current_price": 184.97,
+          "market_cap": 4503464574976,
+          "trailing_pe": 45.784653,
+          "forward_pe": 23.873814,
+          "52_week_high": 212.19,
+          "52_week_low": 86.62,
+          "recommendation": "strong_buy"
+        }
+      }
+    }
+  ]
+}

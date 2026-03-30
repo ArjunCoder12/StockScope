@@ -1,0 +1,17 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "ticker": "TTWO",
+            "sentiment": "negative",
+            "confidence": 0.68,
+            "aggregate_scores": {
+                "positive": 0.07221578860443673,
+                "negative": 0.6754213621871274,
+                "neutral": 0.25236284920843577
+            },
+            "description": "Bearish sentiment detected for TTWO. Recent headlines may be focused on poor earnings, regulatory challenges, or analyst downgrades.",
+            "lastUpdated": "2025-11-09T06:42:47.084418+00:00"
+        }
+    ]
+}
