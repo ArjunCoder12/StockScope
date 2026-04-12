@@ -6,7 +6,7 @@ import time
 news_bp = Blueprint("news", __name__)
 
 _NEWS_CACHE = {} 
-_NEWS_TTL = 300
+_NEWS_TTL = 2700
 
 def _get_news_cached(ticker):
     now = time.time()
@@ -104,4 +104,3 @@ def get_news(ticker):
 
     except Exception as e:
         return jsonify({"status": "error", "data": [], "message": str(e)}), 500
-

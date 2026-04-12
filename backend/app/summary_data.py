@@ -4,7 +4,8 @@ from nlp.summarizer import SentimentAnalyzer, MarketDataFetcher, GeminiSummarize
 import os
 # cache to avoid repeated API calls
 _CACHE = {}
-_CACHE_TTL = 300
+PRICE_CACHE_TTL = 300
+NON_PRICE_CACHE_TTL = 2700
 # Preload Models
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 summarizer = GeminiSummarizer(GEMINI_API_KEY) if GEMINI_API_KEY else None
@@ -14,8 +15,8 @@ def fetch_price_history(ticker):
     key = f"price_{ticker}"
     now = time.time()
 
-    # now - _CACHE_TTL < 300 => checks if the cached data is still not older than 5 min
-    if key in _CACHE and now - _CACHE[key]["ts"] < _CACHE_TTL:
+    # Keep price data fresh; other API/model outputs can be reused longer.
+    if key in _CACHE and now - _CACHE[key]["ts"] < PRICE_CACHE_TTL:
         return _CACHE[key]["data"]
     
     data = get_price_data(ticker, "daily") or {}
@@ -26,7 +27,7 @@ def fetch_company_info(ticker):
     key = f"company_{ticker}"
     now = time.time()
 
-    if key in _CACHE and now - _CACHE[key]["ts"] < _CACHE_TTL:
+    if key in _CACHE and now - _CACHE[key]["ts"] < NON_PRICE_CACHE_TTL:
         return _CACHE[key]["data"]
     
     try:
@@ -47,7 +48,7 @@ def fetch_news_sentiment(ticker):
     key = f"news_{ticker}"
     now = time.time()
 
-    if key in _CACHE and now - _CACHE[key]["ts"] < _CACHE_TTL:
+    if key in _CACHE and now - _CACHE[key]["ts"] < NON_PRICE_CACHE_TTL:
         return _CACHE[key]["data"]
 
     try:
@@ -61,7 +62,7 @@ def fetch_news_sentiment(ticker):
 def fetch_news_summary(ticker): 
     key = f"news_sum_{ticker}"
     now = time.time()
-    if key in _CACHE and now - _CACHE[key]["ts"] < _CACHE_TTL:
+    if key in _CACHE and now - _CACHE[key]["ts"] < NON_PRICE_CACHE_TTL:
         return _CACHE[key]["data"]
     if not summarizer:
         return {"error": "Gemini summarizer not configured"}

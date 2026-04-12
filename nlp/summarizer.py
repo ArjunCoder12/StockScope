@@ -110,23 +110,19 @@ class GeminiSummarizer:
     def generate_card(self, ticker, sentiment_data, fundamentals, user_profile="General Investor"):
         
         prompt = f"""
-        You are a financial analyst AI helper. Write a concise "Stock Summary Card" for {ticker}.
-        
-        TARGET AUDIENCE: {user_profile}
-        
-        DATA:
-        - Sentiment: {sentiment_data.get('sentiment', 'Unknown').upper()} (Confidence: {sentiment_data.get('confidence', 0)})
-        - Context: {sentiment_data.get('description', '')}
-        - Price: {fundamentals.get('current_price', 'N/A')}
-        - P/E Ratio: {fundamentals.get('trailing_pe', 'N/A')}
-        - Analyst Rec: {fundamentals.get('recommendation', 'N/A')}
-        
-        INSTRUCTIONS:
-        1. write exactly 3 sentences
-        2. first sentence: Summarize the current market sentiment and price action.
-        3. second sentence: Mention a key fundamental stat (like P/E or Market Cap) relative to the sentiment and financial indicators like bollinger bands, macd, etc.
-        4. third sentence: Give a brief outlook tailored to the '{user_profile}' persona.
-        5. Do not use markdown formatting like bolding or headers, just plain text.
+        Create a 3-sentence stock summary for {ticker} in plain English. Keep it under 85 words. No markdown.
+
+        Audience: {user_profile}
+        Sentiment: {sentiment_data.get('sentiment', 'unknown')} with confidence {sentiment_data.get('confidence', 0)}
+        Context: {sentiment_data.get('description', 'No sentiment context available.')}
+        Price: {fundamentals.get('current_price', 'N/A')}
+        Trailing P/E: {fundamentals.get('trailing_pe', 'N/A')}
+        Analyst view: {fundamentals.get('recommendation', 'N/A')}
+
+        Sentence 1: sentiment and price action.
+        Sentence 2: one fundamental detail.
+        Sentence 3: practical outlook for the audience.
+        If data is missing, say so briefly. Do not make up facts.
         """
         
         try:
